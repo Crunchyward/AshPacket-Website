@@ -22,16 +22,28 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version-file: .nvmrc
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json', 'package.json') }}-${{ hashFiles('**/*.ts', '**/*.tsx', '**/*.css') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json', 'package.json') }}-
+            ${{ runner.os }}-nextjs-
 
       - name: Build static site
         run: npm run build
         env:
-          # Set this in repo Settings → Secrets and variables → Actions → Variables
-          # Example: /ashpacket-website for username.github.io/ashpacket-website
           NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '' }}
 
       - uses: actions/upload-pages-artifact@v3
