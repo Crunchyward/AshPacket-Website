@@ -1,0 +1,138 @@
+"use client";
+
+import { useState } from "react";
+
+function formatMoney(value: number): string {
+  return value.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
+}
+
+type SliderProps = {
+  id: string;
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  display: string;
+  onChange: (value: number) => void;
+};
+
+function Slider({ id, label, value, min, max, step, display, onChange }: SliderProps) {
+  return (
+    <div>
+      <div className="flex items-baseline justify-between gap-4">
+        <label htmlFor={id} className="text-sm font-medium text-navy-200">
+          {label}
+        </label>
+        <span className="font-mono text-sm font-semibold text-white">{display}</span>
+      </div>
+      <input
+        id={id}
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(event) => onChange(Number(event.target.value))}
+        className="mt-3 h-2 w-full cursor-pointer accent-brand-pink"
+      />
+      <div className="mt-1 flex justify-between font-mono text-[10px] text-navy-500">
+        <span>{min}</span>
+        <span>{max}</span>
+      </div>
+    </div>
+  );
+}
+
+export function DowntimeCalculator() {
+  const [employees, setEmployees] = useState(10);
+  const [wage, setWage] = useState(30);
+  const [hours, setHours] = useState(4);
+
+  const costPerHour = employees * wage;
+  const outageCost = costPerHour * hours;
+
+  return (
+    <section id="calculator" className="py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <p className="section-label">Downtime calculator</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            What does an outage cost you?
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-navy-400">
+            Move the sliders to estimate what your business loses in wages alone
+            when systems go down.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-12 max-w-4xl">
+          <div className="glass-panel rounded-2xl p-6 sm:p-8">
+            <div className="grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+              <div className="space-y-7">
+                <Slider
+                  id="employees"
+                  label="Employees affected"
+                  value={employees}
+                  min={1}
+                  max={100}
+                  step={1}
+                  display={String(employees)}
+                  onChange={setEmployees}
+                />
+                <Slider
+                  id="wage"
+                  label="Average hourly pay"
+                  value={wage}
+                  min={15}
+                  max={100}
+                  step={5}
+                  display={formatMoney(wage)}
+                  onChange={setWage}
+                />
+                <Slider
+                  id="hours"
+                  label="Hours of downtime"
+                  value={hours}
+                  min={1}
+                  max={40}
+                  step={1}
+                  display={`${hours} hr${hours === 1 ? "" : "s"}`}
+                  onChange={setHours}
+                />
+              </div>
+
+              <div aria-hidden className="hidden h-full w-px bg-white/8 lg:block" />
+
+              <div className="text-center">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-navy-500">
+                  Estimated cost of this outage
+                </p>
+                <p className="mt-2 text-4xl font-bold text-gradient-brand sm:text-5xl">
+                  {formatMoney(outageCost)}
+                </p>
+                <p className="mt-3 text-sm text-navy-400">
+                  {formatMoney(costPerHour)} in lost wages every hour
+                </p>
+                <a
+                  href="#contact"
+                  className="btn-brand mt-6 inline-block rounded-xl px-7 py-3 text-sm font-semibold text-white"
+                >
+                  Stop losing money
+                </a>
+                <p className="mt-4 max-w-[16rem] text-xs leading-relaxed text-navy-500 lg:mx-auto">
+                  Wages only. Lost sales, missed deadlines, and recovery work
+                  usually push the real number higher.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
