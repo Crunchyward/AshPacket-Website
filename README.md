@@ -4,7 +4,7 @@ Static business site for AshPacket LLC, built with Next.js and deployed to GitHu
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/) 20 or later (Node 24 recommended — see `.nvmrc`)
+- [Node.js](https://nodejs.org/) 20 or later (Node 24 recommended, see `.nvmrc`)
 - npm (included with Node.js)
 
 Works on Linux, Windows, and WSL.

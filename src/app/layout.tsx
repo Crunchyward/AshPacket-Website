@@ -17,7 +17,7 @@ const jetbrains = JetBrains_Mono({
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const metadata: Metadata = {
-  title: "AshPacket LLC — IT Consulting & Support",
+  title: "AshPacket LLC | IT Consulting & Support",
   description:
     "AshPacket LLC provides system administration, break/fix support, and full-service IT consulting for businesses.",
   icons: {
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     apple: `${basePath}/favicon.png`,
   },
   openGraph: {
-    title: "AshPacket LLC — IT Consulting",
+    title: "AshPacket LLC | IT Consulting",
     description:
       "System administration, break/fix support, and IT consulting for businesses.",
     type: "website",

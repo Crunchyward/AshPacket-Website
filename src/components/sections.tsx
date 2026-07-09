@@ -14,7 +14,7 @@ const services = [
     icon: ServerIcon,
     title: "System Administration",
     description:
-      "Proactive server management, user accounts, backups, and monitoring — keeping your infrastructure healthy before problems start.",
+      "Server management, user accounts, backups, and monitoring. We keep your systems maintained so problems get caught early.",
     highlights: ["Server & cloud admin", "Backup & recovery", "24/7 monitoring"],
   },
   {
@@ -28,7 +28,7 @@ const services = [
     icon: NetworkIcon,
     title: "General IT Services",
     description:
-      "End-to-end IT support — workstations, networking, email, cloud tools, and vendor coordination under one trusted partner.",
+      "Workstations, networking, email, cloud tools, and vendor coordination. One company for all of it.",
     highlights: ["Network & Wi-Fi", "Workstation setup", "Vendor management"],
   },
 ];
@@ -37,7 +37,7 @@ const values = [
   {
     icon: UserIcon,
     title: "Direct access",
-    description: "Work with the same engineer every time — no ticket queues or offshore call centers.",
+    description: "Work with the same engineer every time. No ticket queues, no call centers.",
   },
   {
     icon: ClockIcon,
@@ -47,14 +47,14 @@ const values = [
   {
     icon: ShieldIcon,
     title: "Security-minded",
-    description: "Every recommendation balances reliability, security, and what actually fits your business.",
+    description: "Recommendations weigh reliability, security, and what fits your budget.",
   },
 ];
 
 const steps = [
-  { num: "01", title: "Assess", desc: "We learn your environment, pain points, and priorities." },
-  { num: "02", title: "Plan", desc: "A clear scope — whether it's a one-time fix or ongoing support." },
-  { num: "03", title: "Deliver", desc: "Hands-on execution with transparent communication throughout." },
+  { num: "01", title: "Assess", desc: "We look at your setup and find out what's causing trouble." },
+  { num: "02", title: "Plan", desc: "You get a clear scope, whether it's a one-time fix or ongoing support." },
+  { num: "03", title: "Deliver", desc: "We do the work and keep you informed the whole way." },
 ];
 
 export function Hero() {
@@ -70,8 +70,8 @@ export function Hero() {
             </h1>
             <p className="animate-fade-up-delay-2 mt-6 max-w-lg text-base leading-relaxed text-navy-300 sm:text-lg">
               AshPacket LLC keeps businesses running with system administration,
-              break/fix support, and full-service IT consulting — so you can focus
-              on growth, not outages.
+              break/fix support, and IT consulting. You run the business. We
+              keep the technology working.
             </p>
 
             <div className="animate-fade-up-delay-3 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -85,7 +85,7 @@ export function Hero() {
                 href="#services"
                 className="btn-ghost rounded-xl px-7 py-3.5 text-center text-sm font-semibold text-navy-200"
               >
-                Explore services
+                View services
               </a>
             </div>
 
@@ -118,8 +118,8 @@ export function Services() {
             Everything your business needs to stay online
           </h2>
           <p className="mt-4 text-base leading-relaxed text-navy-400 sm:text-lg">
-            From day-to-day administration to emergency repairs — practical,
-            hands-on IT for small and mid-size businesses.
+            Day-to-day administration, emergency repairs, and everything in
+            between, for small and mid-size businesses.
           </p>
         </div>
 
@@ -171,12 +171,12 @@ export function WhyUs() {
               <div>
                 <p className="section-label">Why AshPacket</p>
                 <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  IT support that actually feels like a partner
+                  Work with an engineer, not a help desk
                 </h2>
                 <p className="mt-4 leading-relaxed text-navy-400">
-                  We&apos;re not a faceless help desk. AshPacket is built on
-                  real-world systems experience — working directly with your team
-                  to solve problems and keep your technology dependable.
+                  AshPacket is built on years of hands-on systems work. We deal
+                  directly with your team, fix what breaks, and keep your
+                  technology dependable.
                 </p>
               </div>
               <div className="grid gap-4 sm:grid-cols-1">
@@ -212,7 +212,7 @@ export function Process() {
         <div className="text-center">
           <p className="section-label">How it works</p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Simple process, serious results
+            What working with us looks like
           </h2>
         </div>
 
@@ -265,7 +265,7 @@ const faqs = [
   {
     question: "What size businesses do you work with?",
     answer:
-      "Primarily small and mid-size businesses — from solo operations to companies with dozens of employees. If you don't have a full-time IT department, we fill that role.",
+      "Mostly small and mid-size businesses, from solo operations to companies with dozens of employees. If you don't have a full-time IT department, we fill that role.",
   },
   {
     question: "Do you offer remote support, on-site, or both?",
@@ -280,7 +280,7 @@ const faqs = [
   {
     question: "Do I need an ongoing contract, or can I call you for one-time fixes?",
     answer:
-      "No contract required. We handle one-time break/fix jobs all the time. That said, ongoing system administration keeps problems from happening in the first place — most clients start with a one-off fix and move to regular support.",
+      "No contract required. We handle one-time break/fix jobs all the time. Ongoing system administration keeps problems from happening in the first place, and many clients move to regular support after a one-off fix.",
   },
   {
     question: "What technologies do you support?",
@@ -290,7 +290,7 @@ const faqs = [
   {
     question: "How quickly do you respond?",
     answer:
-      "Same-day response for most requests, and urgent outages get prioritized immediately. You work directly with an engineer — no ticket queue sitting untouched for days.",
+      "Same-day response for most requests. Urgent outages get priority. You work directly with an engineer, not a ticket queue.",
   },
 ];
 
@@ -353,8 +353,8 @@ export function Contact() {
               Ready to get started?
             </h2>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-navy-400">
-              Tell us what you need — ongoing support, an emergency fix, or a
-              one-time project. We&apos;ll respond promptly.
+              Tell us what you need: ongoing support, an emergency fix, or a
+              one-time project. We&apos;ll get back to you quickly.
             </p>
             <a
               href="mailto:hello@ashpacket.com"
