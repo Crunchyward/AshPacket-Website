@@ -41,6 +41,9 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json', 'package.json') }}-
             ${{ runner.os }}-nextjs-
 
+      - name: Clean metadata files
+        run: node scripts/clean-metadata.mjs
+
       - name: Build static site
         run: npm run build
         env:

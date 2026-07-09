@@ -19,6 +19,8 @@
 /build
 
 # misc
+.DS_Store
+._*
 Thumbs.db
 Desktop.ini
 *.pem
