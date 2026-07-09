@@ -1,10 +1,11 @@
 import { Header } from "@/components/header";
 import {
-  About,
   Contact,
   Footer,
   Hero,
+  Process,
   Services,
+  WhyUs,
 } from "@/components/sections";
 
 export default function Home() {
@@ -14,7 +15,8 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
-        <About />
+        <WhyUs />
+        <Process />
         <Contact />
       </main>
       <Footer />
