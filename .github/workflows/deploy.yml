@@ -46,7 +46,15 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '' }}
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Verify build output
+        run: |
+          if [ ! -d out ] || [ -z "$(ls -A out)" ]; then
+            echo "Build did not produce static files in out/"
+            exit 1
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
         with:
           path: out
 
@@ -57,5 +65,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
