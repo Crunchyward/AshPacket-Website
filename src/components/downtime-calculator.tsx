@@ -38,7 +38,7 @@ function Slider({ id, label, value, min, max, step, display, onChange }: SliderP
         step={step}
         value={value}
         onChange={(event) => onChange(Number(event.target.value))}
-        className="mt-3 h-2 w-full cursor-pointer accent-brand-pink"
+        className="slider-brand mt-3 w-full cursor-pointer"
       />
       <div className="mt-1 flex justify-between font-mono text-[10px] text-navy-500">
         <span>{min}</span>
@@ -120,11 +120,11 @@ export function DowntimeCalculator() {
                 </p>
                 <a
                   href="#contact"
-                  className="btn-brand mt-6 inline-block rounded-xl px-7 py-3 text-sm font-semibold text-white"
+                  className="btn-brand mt-6 inline-block w-full rounded-xl px-7 py-3.5 text-sm font-semibold text-white sm:w-auto sm:py-3"
                 >
                   Stop losing money
                 </a>
-                <p className="mt-4 max-w-[16rem] text-xs leading-relaxed text-navy-500 lg:mx-auto">
+                <p className="mx-auto mt-4 max-w-[16rem] text-xs leading-relaxed text-navy-500">
                   Wages only. Lost sales, missed deadlines, and recovery work
                   usually push the real number higher.
                 </p>

@@ -58,7 +58,7 @@ export function ContactForm() {
             type="text"
             required
             autoComplete="name"
-            className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
+            className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-white sm:text-sm placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
             placeholder="Your name"
           />
         </div>
@@ -72,7 +72,7 @@ export function ContactForm() {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
+            className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-white sm:text-sm placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
             placeholder="you@company.com"
           />
         </div>
@@ -86,7 +86,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className="w-full resize-y rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
+          className="w-full resize-y rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-white sm:text-sm placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
           placeholder="Tell us what's going on: an outage, a project, or ongoing support."
         />
       </div>
