@@ -1,3 +1,4 @@
+import { ContactForm } from "@/components/contact-form";
 import { HeroVisual } from "@/components/hero-visual";
 import {
   ClockIcon,
@@ -345,27 +346,38 @@ export function Contact() {
     <section id="contact" className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="gradient-border">
-          <div className="gradient-border-inner px-6 py-14 text-center sm:px-12 sm:py-16">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-purple/30 to-brand-pink/20 text-brand-pink-light ring-1 ring-white/10">
-              <MailIcon className="h-6 w-6" />
+          <div className="gradient-border-inner px-6 py-14 sm:px-12 sm:py-16">
+            <div className="mx-auto max-w-2xl">
+              <div className="text-center">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-purple/30 to-brand-pink/20 text-brand-pink-light ring-1 ring-white/10">
+                  <MailIcon className="h-6 w-6" />
+                </div>
+                <h2 className="mt-6 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                  Ready to get started?
+                </h2>
+                <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-navy-400">
+                  Tell us what you need: ongoing support, an emergency fix, or a
+                  one-time project. We&apos;ll get back to you quickly.
+                </p>
+              </div>
+
+              <div className="mt-10">
+                <ContactForm />
+              </div>
+
+              <p className="mt-8 text-center text-sm text-navy-400">
+                Prefer email?{" "}
+                <a
+                  href="mailto:hello@ashpacket.com"
+                  className="text-brand-pink-light underline-offset-4 hover:underline"
+                >
+                  hello@ashpacket.com
+                </a>
+              </p>
+              <p className="mt-2 text-center font-mono text-xs text-navy-500">
+                Remote &amp; on-site support available
+              </p>
             </div>
-            <h2 className="mt-6 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Ready to get started?
-            </h2>
-            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-navy-400">
-              Tell us what you need: ongoing support, an emergency fix, or a
-              one-time project. We&apos;ll get back to you quickly.
-            </p>
-            <a
-              href="mailto:hello@ashpacket.com"
-              className="btn-brand mt-8 inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold text-white"
-            >
-              <MailIcon className="h-4 w-4" />
-              hello@ashpacket.com
-            </a>
-            <p className="mt-4 font-mono text-xs text-navy-500">
-              Remote &amp; on-site support available
-            </p>
           </div>
         </div>
       </div>

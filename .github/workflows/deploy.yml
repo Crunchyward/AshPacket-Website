@@ -59,10 +59,19 @@ jobs:
           echo "Using base path: '$BASE'"
           echo "base=$BASE" >> "$GITHUB_OUTPUT"
 
+          SITE="${{ vars.NEXT_PUBLIC_SITE_URL }}"
+          if [ -z "$SITE" ]; then
+            OWNER="$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')"
+            SITE="https://${OWNER}.github.io${BASE}"
+          fi
+          echo "Using site URL: '$SITE'"
+          echo "site=$SITE" >> "$GITHUB_OUTPUT"
+
       - name: Build static site
         run: npm run build
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.basepath.outputs.base }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.basepath.outputs.site }}
 
       - name: Verify build output
         run: |
