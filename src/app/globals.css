@@ -200,3 +200,11 @@ body {
 .status-dot {
   animation: pulse-glow 2s ease-in-out infinite;
 }
+
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-item[open] {
+  border-color: rgba(139, 92, 246, 0.35);
+}

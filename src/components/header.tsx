@@ -6,7 +6,7 @@ import { Logo } from "@/components/logo";
 const navLinks = [
   { href: "#services", label: "Services" },
   { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 function MenuIcon({ open }: { open: boolean }) {

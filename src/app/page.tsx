@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import {
   Contact,
+  Faq,
   Footer,
   Hero,
   Process,
@@ -17,6 +18,7 @@ export default function Home() {
         <Services />
         <WhyUs />
         <Process />
+        <Faq />
         <Contact />
       </main>
       <Footer />

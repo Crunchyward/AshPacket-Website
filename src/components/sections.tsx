@@ -261,6 +261,85 @@ export function Process() {
   );
 }
 
+const faqs = [
+  {
+    question: "What size businesses do you work with?",
+    answer:
+      "Primarily small and mid-size businesses — from solo operations to companies with dozens of employees. If you don't have a full-time IT department, we fill that role.",
+  },
+  {
+    question: "Do you offer remote support, on-site, or both?",
+    answer:
+      "Both. Many issues can be resolved remotely within the same day. For hardware problems, network installs, or anything that needs hands on equipment, we come to you.",
+  },
+  {
+    question: "What happens when something breaks outside business hours?",
+    answer:
+      "Reach out anyway. Emergencies don't keep a schedule, and we triage urgent outages as they come in. We'll let you know right away what we can do and when.",
+  },
+  {
+    question: "Do I need an ongoing contract, or can I call you for one-time fixes?",
+    answer:
+      "No contract required. We handle one-time break/fix jobs all the time. That said, ongoing system administration keeps problems from happening in the first place — most clients start with a one-off fix and move to regular support.",
+  },
+  {
+    question: "What technologies do you support?",
+    answer:
+      "Windows and Linux servers, workstations and laptops, networking and Wi-Fi, email and cloud platforms like Microsoft 365 and Google Workspace, backups, and most business software. If it plugs in or connects to the internet, we can probably help.",
+  },
+  {
+    question: "How quickly do you respond?",
+    answer:
+      "Same-day response for most requests, and urgent outages get prioritized immediately. You work directly with an engineer — no ticket queue sitting untouched for days.",
+  },
+];
+
+export function Faq() {
+  return (
+    <section id="faq" className="py-20 sm:py-28">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <p className="section-label">FAQ</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Common questions
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-navy-400">
+            Quick answers about how we work. Don&apos;t see yours?{" "}
+            <a href="#contact" className="text-brand-pink-light underline-offset-4 hover:underline">
+              Just ask.
+            </a>
+          </p>
+        </div>
+
+        <div className="mt-12 space-y-3">
+          {faqs.map((faq) => (
+            <details key={faq.question} className="faq-item glass-card group rounded-2xl">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
+                <span className="text-sm font-semibold text-white sm:text-base">
+                  {faq.question}
+                </span>
+                <span
+                  aria-hidden
+                  className="faq-chevron flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/5 text-navy-300 transition-transform duration-300"
+                >
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+                  </svg>
+                </span>
+              </summary>
+              <div className="px-5 pb-5 sm:px-6 sm:pb-6">
+                <p className="border-t border-white/6 pt-4 text-sm leading-relaxed text-navy-300">
+                  {faq.answer}
+                </p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Contact() {
   return (
     <section id="contact" className="py-20 sm:py-28">
@@ -311,6 +390,9 @@ export function Footer() {
             </a>
             <a href="#about" className="transition-colors hover:text-white">
               About
+            </a>
+            <a href="#faq" className="transition-colors hover:text-white">
+              FAQ
             </a>
             <a href="#contact" className="transition-colors hover:text-white">
               Contact

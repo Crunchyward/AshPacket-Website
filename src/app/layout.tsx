@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   description:
     "AshPacket LLC provides system administration, break/fix support, and full-service IT consulting for businesses.",
   icons: {
-    icon: `${basePath}/ashpacket-logo.png`,
-    apple: `${basePath}/ashpacket-logo.png`,
+    icon: `${basePath}/favicon.png`,
+    apple: `${basePath}/favicon.png`,
   },
   openGraph: {
     title: "AshPacket LLC — IT Consulting",
