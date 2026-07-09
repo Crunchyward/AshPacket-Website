@@ -44,10 +44,25 @@ jobs:
       - name: Clean metadata files
         run: node scripts/clean-metadata.mjs
 
+      - name: Determine base path
+        id: basepath
+        # Sites served at username.github.io/repo-name need assets prefixed
+        # with /repo-name. Set the NEXT_PUBLIC_BASE_PATH repo variable to "/"
+        # to override this when using a custom domain or a root user site.
+        run: |
+          BASE="${{ vars.NEXT_PUBLIC_BASE_PATH }}"
+          if [ -z "$BASE" ]; then
+            BASE="/${{ github.event.repository.name }}"
+          elif [ "$BASE" = "/" ]; then
+            BASE=""
+          fi
+          echo "Using base path: '$BASE'"
+          echo "base=$BASE" >> "$GITHUB_OUTPUT"
+
       - name: Build static site
         run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '' }}
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.basepath.outputs.base }}
 
       - name: Verify build output
         run: |
