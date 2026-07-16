@@ -1,71 +1,146 @@
+function RackColumn({
+  id,
+  units,
+  offset = 0,
+  delay = 0,
+}: {
+  id: string;
+  units: { on: boolean; fill: number }[];
+  offset?: number;
+  delay?: number;
+}) {
+  return (
+    <div
+      className="flex flex-1 flex-col rounded-sm border border-white/10 bg-ink-900/75 p-1.5 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.35)]"
+      style={{ transform: `translateY(${offset}px)` }}
+    >
+      <div className="mb-1.5 flex items-center justify-between px-1 py-0.5">
+        <span className="font-mono text-[9px] tracking-widest text-ink-500">{id}</span>
+        <span
+          className="rack-led h-1.5 w-1.5 rounded-full bg-signal"
+          style={{ animationDelay: `${delay}s` }}
+        />
+      </div>
+      <div className="flex min-h-0 flex-1 flex-col gap-[3px]">
+        {units.map((unit, i) => (
+          <div
+            key={`${id}-${i}`}
+            className="relative min-h-0 flex-1 overflow-hidden rounded-[2px] border border-white/[0.06] bg-ink-950/90"
+          >
+            <div
+              className={`absolute left-1.5 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full ${
+                unit.on ? "bg-signal rack-led" : "bg-ink-700"
+              }`}
+              style={{ animationDelay: `${i * 0.18 + delay}s` }}
+            />
+            <div className="absolute inset-y-[35%] left-5 right-2 rounded-full bg-white/[0.04]" />
+            {unit.on && (
+              <div
+                className="rack-bar absolute inset-y-[35%] left-5 rounded-full opacity-55"
+                style={{ width: `${unit.fill}%` }}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function HeroVisual() {
   const racks = [
-    { id: "RACK-A", leds: [true, true, true, false, true, true] },
-    { id: "RACK-B", leds: [true, true, false, true, true, true] },
-    { id: "RACK-C", leds: [true, false, true, true, true, false] },
+    {
+      id: "RACK-A",
+      offset: 0,
+      units: [
+        { on: true, fill: 72 },
+        { on: true, fill: 48 },
+        { on: true, fill: 88 },
+        { on: false, fill: 0 },
+        { on: true, fill: 36 },
+        { on: true, fill: 64 },
+        { on: true, fill: 52 },
+        { on: true, fill: 41 },
+        { on: false, fill: 0 },
+        { on: true, fill: 77 },
+        { on: true, fill: 29 },
+        { on: true, fill: 58 },
+      ],
+    },
+    {
+      id: "RACK-B",
+      offset: 18,
+      units: [
+        { on: true, fill: 55 },
+        { on: true, fill: 80 },
+        { on: false, fill: 0 },
+        { on: true, fill: 43 },
+        { on: true, fill: 67 },
+        { on: true, fill: 91 },
+        { on: true, fill: 33 },
+        { on: false, fill: 0 },
+        { on: true, fill: 61 },
+        { on: true, fill: 74 },
+        { on: true, fill: 46 },
+        { on: true, fill: 38 },
+      ],
+    },
+    {
+      id: "RACK-C",
+      offset: 8,
+      units: [
+        { on: true, fill: 40 },
+        { on: false, fill: 0 },
+        { on: true, fill: 69 },
+        { on: true, fill: 84 },
+        { on: true, fill: 51 },
+        { on: true, fill: 27 },
+        { on: false, fill: 0 },
+        { on: true, fill: 63 },
+        { on: true, fill: 78 },
+        { on: true, fill: 45 },
+        { on: true, fill: 56 },
+        { on: true, fill: 70 },
+      ],
+    },
   ];
 
   const nodes = [
     { name: "edge-fw-01", role: "Firewall", load: 28 },
     { name: "app-node-02", role: "App host", load: 61 },
     { name: "nas-backup", role: "Storage", load: 44 },
+    { name: "build-lab", role: "Imaging", load: 19 },
   ];
 
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-    >
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="hero-plane" />
       <div className="hero-scan" />
 
       {/* Dominant rack / ops plane — full-bleed right side */}
-      <div className="absolute inset-y-0 right-0 hidden w-[55%] lg:block">
-        <div className="absolute inset-0 bg-gradient-to-l from-ink-950 via-ink-950/40 to-transparent" />
-        <div className="absolute inset-y-10 right-8 left-8 flex gap-4 opacity-90">
+      <div className="absolute inset-y-0 right-0 hidden w-[56%] lg:block">
+        <div className="absolute inset-0 bg-gradient-to-l from-ink-950 via-ink-950/50 to-transparent" />
+        <div className="absolute bottom-36 top-24 right-8 left-6 flex gap-3">
           {racks.map((rack, ri) => (
-            <div
+            <RackColumn
               key={rack.id}
-              className="flex flex-1 flex-col gap-1.5 rounded-sm border border-white/10 bg-ink-900/70 p-2"
-              style={{ transform: `translateY(${ri * 12}px)` }}
-            >
-              <div className="mb-1 flex items-center justify-between px-1">
-                <span className="font-mono text-[9px] tracking-widest text-ink-500">
-                  {rack.id}
-                </span>
-                <span className="rack-led h-1.5 w-1.5 rounded-full bg-signal" style={{ animationDelay: `${ri * 0.4}s` }} />
-              </div>
-              {rack.leds.map((on, i) => (
-                <div
-                  key={`${rack.id}-${i}`}
-                  className="relative h-7 overflow-hidden rounded-[2px] border border-white/6 bg-ink-950/80"
-                >
-                  <div
-                    className={`absolute left-2 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full ${
-                      on ? "bg-signal rack-led" : "bg-ink-700"
-                    }`}
-                    style={{ animationDelay: `${i * 0.25 + ri * 0.15}s` }}
-                  />
-                  <div className="absolute inset-x-8 top-1/2 h-px -translate-y-1/2 bg-white/8" />
-                  {on && (
-                    <div
-                      className="rack-bar absolute inset-y-2 left-8 right-3 opacity-40"
-                      style={{ width: `${35 + ((i * 17 + ri * 11) % 45)}%` }}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
+              id={rack.id}
+              units={rack.units}
+              offset={rack.offset}
+              delay={ri * 0.35}
+            />
           ))}
         </div>
 
-        {/* Terminal readout overlay — part of the visual plane, not a floating badge */}
-        <div className="absolute bottom-16 left-10 right-16 panel rounded-lg p-4">
+        <div className="absolute bottom-12 left-8 right-14 panel rounded-lg p-4">
           <div className="mb-3 flex items-center justify-between border-b border-white/8 pb-2">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">
               ashpacketctl status
             </p>
-            <span className="font-mono text-[10px] text-signal">LIVE</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-signal">
+              <span className="status-dot h-1.5 w-1.5 rounded-full bg-signal" />
+              LIVE
+            </span>
           </div>
           <div className="space-y-2">
             {nodes.map((node) => (
@@ -76,27 +151,46 @@ export function HeroVisual() {
                 <div className="h-1 w-16 overflow-hidden rounded-full bg-ink-800">
                   <div className="h-full bg-signal" style={{ width: `${node.load}%` }} />
                 </div>
+                <span className="w-8 text-right font-mono text-[10px] text-ink-500">
+                  {node.load}%
+                </span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="sweep-line absolute top-1/3 h-px w-1/3 bg-gradient-to-r from-transparent via-signal/50 to-transparent" />
+        <div className="sweep-line absolute top-[28%] h-px w-2/5 bg-gradient-to-r from-transparent via-signal/55 to-transparent" />
       </div>
 
-      {/* Mobile / tablet atmosphere — simplified rack silhouette */}
-      <div className="absolute inset-x-0 bottom-0 h-48 opacity-40 lg:hidden">
-        <div className="mx-auto flex h-full max-w-md gap-2 px-6 pb-4">
-          {racks.map((rack) => (
+      {/* Mobile atmosphere — denser rack strip */}
+      <div className="absolute inset-x-0 bottom-0 h-40 lg:hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 mx-auto flex h-28 max-w-lg gap-1.5 px-5 pb-3 opacity-70">
+          {racks.map((rack, ri) => (
             <div
               key={`m-${rack.id}`}
-              className="flex flex-1 flex-col justify-end gap-1 border border-white/8 bg-ink-900/50 p-1.5"
+              className="flex flex-1 flex-col gap-0.5 border border-white/10 bg-ink-900/60 p-1"
             >
-              {rack.leds.slice(0, 4).map((on, i) => (
+              <div className="mb-0.5 flex justify-end">
+                <span
+                  className="rack-led h-1 w-1 rounded-full bg-signal"
+                  style={{ animationDelay: `${ri * 0.3}s` }}
+                />
+              </div>
+              {rack.units.slice(0, 8).map((unit, i) => (
                 <div
                   key={i}
-                  className={`h-3 border border-white/5 ${on ? "bg-signal/20" : "bg-ink-950/60"}`}
-                />
+                  className={`relative h-full min-h-[6px] flex-1 border border-white/5 ${
+                    unit.on ? "bg-ink-950" : "bg-ink-950/40"
+                  }`}
+                >
+                  {unit.on && (
+                    <div
+                      className="absolute inset-y-[30%] left-1 right-1 rounded-full bg-signal/35"
+                      style={{ width: `${Math.max(unit.fill - 20, 25)}%` }}
+                    />
+                  )}
+                </div>
               ))}
             </div>
           ))}
