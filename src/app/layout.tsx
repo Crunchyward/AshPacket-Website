@@ -1,32 +1,33 @@
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import type { Metadata, Viewport } from "next";
 import { basePath, siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const display = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const mono = IBM_Plex_Mono({
+  variable: "--font-mono-code",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
 const description =
-  "AshPacket LLC provides system administration, break/fix support, and full-service IT consulting for businesses.";
+  "AshPacket LLC delivers managed IT, system administration, break/fix support, and custom PC & server builds for businesses that need reliable infrastructure.";
 
 export const metadata: Metadata = {
-  title: "AshPacket LLC | IT Consulting & Support",
+  title: "AshPacket LLC | Managed IT, Sysadmin & Custom Builds",
   description,
   icons: {
     icon: `${basePath}/favicon.png`,
     apple: `${basePath}/favicon.png`,
   },
   openGraph: {
-    title: "AshPacket LLC | IT Consulting",
+    title: "AshPacket LLC | Managed IT & Infrastructure",
     description,
     type: "website",
     url: siteUrl,
@@ -36,13 +37,13 @@ export const metadata: Metadata = {
         url: `${siteUrl}/og-image.png`,
         width: 1024,
         height: 683,
-        alt: "AshPacket LLC, IT Consulting & Support",
+        alt: "AshPacket LLC — Managed IT, Sysadmin & Custom Builds",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AshPacket LLC | IT Consulting",
+    title: "AshPacket LLC | Managed IT & Infrastructure",
     description,
     images: [`${siteUrl}/og-image.png`],
   },
@@ -64,8 +65,11 @@ const businessSchema = {
   image: `${siteUrl}/ashpacket-logo.png`,
   priceRange: "$$",
   knowsAbout: [
+    "Managed service provider",
     "System administration",
     "IT break/fix support",
+    "Custom PC builds",
+    "Server builds",
     "Networking",
     "Cloud services",
   ],
@@ -78,7 +82,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jakarta.variable} ${jetbrains.variable} font-sans antialiased`}>
+      <body className={`${display.variable} ${mono.variable} font-sans antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}

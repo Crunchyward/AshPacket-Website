@@ -2,7 +2,9 @@ import { ContactForm } from "@/components/contact-form";
 import { HeroVisual } from "@/components/hero-visual";
 import {
   ClockIcon,
+  CpuIcon,
   MailIcon,
+  MonitorIcon,
   NetworkIcon,
   ServerIcon,
   ShieldIcon,
@@ -12,97 +14,114 @@ import {
 
 const services = [
   {
+    icon: NetworkIcon,
+    code: "01",
+    title: "Managed IT (MSP)",
+    description:
+      "Proactive monitoring, patching, backups, and day-to-day ops so your stack stays healthy before tickets pile up.",
+    highlights: ["Endpoint & server monitoring", "Patch & backup cadence", "Vendor coordination"],
+  },
+  {
     icon: ServerIcon,
+    code: "02",
     title: "System Administration",
     description:
-      "Server management, user accounts, backups, and monitoring. We keep your systems maintained so problems get caught early.",
-    highlights: ["Server & cloud admin", "Backup & recovery", "24/7 monitoring"],
+      "Windows and Linux servers, Active Directory, identity, storage, and cloud platforms kept clean, documented, and recoverable.",
+    highlights: ["Server & AD admin", "Cloud & hybrid ops", "Backup / DR drills"],
+  },
+  {
+    icon: CpuIcon,
+    code: "03",
+    title: "Custom PC & Server Builds",
+    description:
+      "Workstations, NAS boxes, and rack servers built to spec—parts selection, assembly, burn-in, imaging, and handoff.",
+    highlights: ["Workstation & gaming/pro builds", "Rack & tower servers", "Imaging & deployment"],
   },
   {
     icon: WrenchIcon,
+    code: "04",
     title: "Break / Fix Support",
     description:
-      "Fast response when things go wrong. We diagnose, repair, and resolve root causes so your team gets back to work quickly.",
-    highlights: ["Rapid troubleshooting", "On-site & remote", "Root-cause fixes"],
-  },
-  {
-    icon: NetworkIcon,
-    title: "General IT Services",
-    description:
-      "Workstations, networking, email, cloud tools, and vendor coordination. One company for all of it.",
-    highlights: ["Network & Wi-Fi", "Workstation setup", "Vendor management"],
+      "When something fails, you get an engineer—not a script. Remote or on-site diagnosis with root-cause remediation.",
+    highlights: ["Same-day triage", "Remote & on-site", "Root-cause fixes"],
   },
 ];
 
 const values = [
   {
     icon: UserIcon,
-    title: "Direct access",
-    description: "Work with the same engineer every time. No ticket queues, no call centers.",
+    title: "Direct engineer access",
+    description: "Talk to the person doing the work. No ticket roulette, no offshore call tree.",
   },
   {
     icon: ClockIcon,
-    title: "Fast response",
-    description: "When downtime costs money, we prioritize getting you back online first.",
+    title: "Ops-first response",
+    description: "Outages get priority. We restore service first, then harden so it does not repeat.",
   },
   {
     icon: ShieldIcon,
-    title: "Security-minded",
-    description: "Recommendations weigh reliability, security, and what fits your budget.",
+    title: "Security-aware by default",
+    description: "Backups, least privilege, and sane baselines—balanced against what your budget can sustain.",
   },
 ];
 
 const steps = [
-  { num: "01", title: "Assess", desc: "We look at your setup and find out what's causing trouble." },
-  { num: "02", title: "Plan", desc: "You get a clear scope, whether it's a one-time fix or ongoing support." },
-  { num: "03", title: "Deliver", desc: "We do the work and keep you informed the whole way." },
+  { num: "01", title: "Assess", desc: "Inventory, pain points, and risk: what is live, what is fragile, what needs building." },
+  { num: "02", title: "Plan", desc: "Clear scope for managed support, a one-off fix, or a full workstation/server build." },
+  { num: "03", title: "Deliver", desc: "We implement, document, and leave you with systems you can trust day to day." },
+];
+
+const buildSpecs = [
+  {
+    icon: MonitorIcon,
+    title: "Workstations",
+    body: "Quiet office PCs, creator rigs, and CAD/engineering stations sized for the software you actually run.",
+  },
+  {
+    icon: ServerIcon,
+    title: "Servers & storage",
+    body: "Tower or rack servers, Hyper-V/Proxmox hosts, and NAS/backup targets with proper cooling and power.",
+  },
+  {
+    icon: CpuIcon,
+    title: "Deploy ready",
+    body: "BIOS tuned, OS imaged, agents installed, and burn-in completed before it ever hits your desk or rack.",
+  },
 ];
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <p className="section-label animate-fade-up">IT Consulting · Sysadmin · Support</p>
-            <h1 className="animate-fade-up-delay-1 mt-4 text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-              Your IT infrastructure,{" "}
-              <span className="text-gradient-brand">handled by experts.</span>
-            </h1>
-            <p className="animate-fade-up-delay-2 mt-6 max-w-lg text-base leading-relaxed text-navy-300 sm:text-lg">
-              AshPacket LLC keeps businesses running with system administration,
-              break/fix support, and IT consulting. You run the business. We
-              keep the technology working.
-            </p>
+    <section className="relative min-h-[100svh] overflow-hidden">
+      <HeroVisual />
 
-            <div className="animate-fade-up-delay-3 mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a
-                href="#contact"
-                className="btn-brand rounded-xl px-7 py-3.5 text-center text-sm font-semibold text-white"
-              >
-                Schedule a consultation
-              </a>
-              <a
-                href="#services"
-                className="btn-ghost rounded-xl px-7 py-3.5 text-center text-sm font-semibold text-navy-200"
-              >
-                View services
-              </a>
-            </div>
+      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pb-24 pt-28 sm:px-6 sm:pb-28 sm:pt-32 lg:px-8">
+        <div className="max-w-2xl">
+          <p className="animate-fade-up font-mono text-xs tracking-[0.28em] text-signal uppercase">
+            AshPacket LLC
+          </p>
+          <h1 className="animate-fade-up-delay-1 mt-5 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.65rem]">
+            Infrastructure that{" "}
+            <span className="text-gradient-signal">stays online.</span>
+          </h1>
+          <p className="animate-fade-up-delay-2 mt-6 max-w-xl text-base leading-relaxed text-ink-300 sm:text-lg">
+            Managed IT, hands-on system administration, and custom PC &amp; server
+            builds—so your team ships work, not tickets.
+          </p>
 
-            <div className="animate-fade-up-delay-3 mt-10 flex flex-wrap gap-2">
-              {["Sysadmin", "Break/Fix", "Networking", "Cloud"].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-white/8 bg-white/[0.04] px-3 py-1 font-mono text-[11px] text-navy-300"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+          <div className="animate-fade-up-delay-3 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a
+              href="#contact"
+              className="btn-brand rounded-lg px-7 py-3.5 text-center text-sm font-semibold"
+            >
+              Talk to an engineer
+            </a>
+            <a
+              href="#services"
+              className="btn-ghost rounded-lg px-7 py-3.5 text-center text-sm font-semibold text-ink-200"
+            >
+              Explore services
+            </a>
           </div>
-
-          <HeroVisual />
         </div>
       </div>
     </section>
@@ -115,47 +134,89 @@ export function Services() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="section-label">Services</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Everything your business needs to stay online
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            MSP coverage, sysadmin depth, and hardware done right
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-navy-400 sm:text-lg">
-            Day-to-day administration, emergency repairs, and everything in
-            between, for small and mid-size businesses.
+          <p className="mt-4 text-base leading-relaxed text-ink-400 sm:text-lg">
+            From proactive managed support to emergency repair and purpose-built
+            machines—one team for the full stack.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {services.map((service, i) => (
+        <div className="mt-12">
+          {services.map((service) => (
             <article
               key={service.title}
-              className="glass-card group relative overflow-hidden rounded-2xl p-6 sm:p-7"
+              className="service-row group grid gap-4 px-2 py-7 sm:grid-cols-[auto_1fr_1.1fr] sm:items-start sm:gap-8 sm:px-4"
             >
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-brand-purple/10 blur-2xl transition-all group-hover:bg-brand-purple/20"
-              />
-              <div className="relative">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-purple/30 to-brand-pink/20 text-brand-pink-light ring-1 ring-white/10">
+              <div className="flex items-center gap-3 sm:block sm:w-28">
+                <div className="flex h-10 w-10 items-center justify-center rounded-md border border-signal/25 bg-signal/10 text-signal-bright">
                   <service.icon className="h-5 w-5" />
                 </div>
-                <p className="mt-5 font-mono text-[10px] tracking-widest text-navy-500">
-                  0{i + 1}
+                <p className="font-mono text-[11px] tracking-widest text-ink-500 sm:mt-3">
+                  {service.code}
                 </p>
-                <h3 className="mt-1 text-xl font-semibold text-white">{service.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-navy-400">
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-white">{service.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-400 sm:text-[15px]">
                   {service.description}
                 </p>
-                <ul className="mt-5 space-y-2 border-t border-white/6 pt-5">
-                  {service.highlights.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-navy-300">
-                      <span className="h-1 w-1 shrink-0 rounded-full bg-brand-pink" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
+              <ul className="space-y-2 sm:pt-1">
+                {service.highlights.map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm text-ink-300">
+                    <span className="h-px w-4 shrink-0 bg-signal/70" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </article>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Builds() {
+  return (
+    <section id="builds" className="relative py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-end lg:gap-16">
+          <div>
+            <p className="section-label">Custom builds</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Spec, assemble, burn-in, deploy
+            </h2>
+            <p className="mt-4 leading-relaxed text-ink-400">
+              Need a quiet office PC, a render workstation, or a small business
+              server that just works? We build to your workload—not a retail SKU.
+            </p>
+            <a
+              href="#contact"
+              className="btn-brand mt-8 inline-block rounded-lg px-6 py-3 text-sm font-semibold"
+            >
+              Request a build quote
+            </a>
+          </div>
+
+          <div className="space-y-0 border-t border-white/8">
+            {buildSpecs.map((item) => (
+              <div
+                key={item.title}
+                className="flex gap-4 border-b border-white/8 py-6"
+              >
+                <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/[0.03] text-signal-bright">
+                  <item.icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink-400">{item.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -166,38 +227,34 @@ export function WhyUs() {
   return (
     <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="gradient-border">
-          <div className="gradient-border-inner px-6 py-12 sm:px-10 sm:py-14">
-            <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-              <div>
-                <p className="section-label">Why AshPacket</p>
-                <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  Work with an engineer, not a help desk
-                </h2>
-                <p className="mt-4 leading-relaxed text-navy-400">
-                  AshPacket is built on years of hands-on systems work. We deal
-                  directly with your team, fix what breaks, and keep your
-                  technology dependable.
-                </p>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-1">
-                {values.map((item) => (
-                  <div
-                    key={item.title}
-                    className="flex gap-4 rounded-xl border border-white/6 bg-white/[0.02] p-4 sm:p-5"
-                  >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-purple/15 text-brand-pink-light">
-                      <item.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white">{item.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-navy-400">
-                        {item.description}
-                      </p>
-                    </div>
+        <div className="panel rounded-xl px-6 py-12 sm:px-10 sm:py-14">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <div>
+              <p className="section-label">Why AshPacket</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                An engineer on call—not a help desk script
+              </h2>
+              <p className="mt-4 leading-relaxed text-ink-400">
+                AshPacket is built on years of hands-on systems work: servers,
+                networks, endpoints, and the builds that power them. We plug into
+                your business like an MSP, with the accountability of a senior
+                admin.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {values.map((item) => (
+                <div key={item.title} className="flex gap-4 border-l-2 border-signal/40 pl-4">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center text-signal-bright">
+                    <item.icon className="h-5 w-5" />
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <h3 className="font-semibold text-white">{item.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-ink-400">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -210,50 +267,43 @@ export function Process() {
   return (
     <section id="about" className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <div className="max-w-2xl">
           <p className="section-label">How it works</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            What working with us looks like
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            From triage to steady-state ops
           </h2>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
           {steps.map((step, i) => (
-            <div key={step.num} className="relative text-center">
+            <div key={step.num} className="relative">
               {i < steps.length - 1 && (
                 <div
                   aria-hidden
-                  className="absolute left-[calc(50%+2.5rem)] top-8 hidden h-px w-[calc(100%-5rem)] bg-gradient-to-r from-brand-purple/40 to-transparent md:block"
+                  className="absolute left-12 top-5 hidden h-px w-[calc(100%-1.5rem)] bg-gradient-to-r from-signal/40 to-transparent md:block"
                 />
               )}
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-purple/25 to-brand-pink/15 ring-1 ring-white/10">
-                <span className="font-mono text-lg font-bold text-gradient-brand">
-                  {step.num}
-                </span>
-              </div>
-              <h3 className="mt-5 text-lg font-semibold text-white">{step.title}</h3>
-              <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-navy-400">
+              <p className="font-mono text-sm font-semibold text-gradient-signal">{step.num}</p>
+              <h3 className="mt-3 text-lg font-semibold text-white">{step.title}</h3>
+              <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink-400">
                 {step.desc}
               </p>
             </div>
           ))}
         </div>
 
-        <dl className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <dl className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-white/8 bg-white/8 sm:grid-cols-4">
           {[
-            { label: "Specialty", value: "Sysadmin" },
+            { label: "Focus", value: "MSP + Sysadmin" },
             { label: "Response", value: "Same-day" },
-            { label: "Coverage", value: "Full-stack IT" },
-            { label: "Approach", value: "Hands-on" },
+            { label: "Hardware", value: "Custom builds" },
+            { label: "Coverage", value: "Remote & on-site" },
           ].map((item) => (
-            <div
-              key={item.label}
-              className="glass-card rounded-xl p-5 text-center"
-            >
-              <dt className="font-mono text-[10px] uppercase tracking-widest text-navy-500">
+            <div key={item.label} className="bg-ink-950 px-5 py-6 text-center">
+              <dt className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
                 {item.label}
               </dt>
-              <dd className="mt-2 text-lg font-semibold text-white">{item.value}</dd>
+              <dd className="mt-2 text-base font-semibold text-white sm:text-lg">{item.value}</dd>
             </div>
           ))}
         </dl>
@@ -266,32 +316,32 @@ const faqs = [
   {
     question: "What size businesses do you work with?",
     answer:
-      "Mostly small and mid-size businesses, from solo operations to companies with dozens of employees. If you don't have a full-time IT department, we fill that role.",
+      "Mostly small and mid-size organizations—from solo operators to teams with dozens of seats. If you need MSP-style coverage without a full-time IT department, we fill that role.",
   },
   {
     question: "Do you offer remote support, on-site, or both?",
     answer:
-      "Both. Many issues can be resolved remotely within the same day. For hardware problems, network installs, or anything that needs hands on equipment, we come to you.",
+      "Both. Most issues resolve remotely the same day. Hardware failures, network installs, rack work, and custom builds are handled on-site or in our build workflow.",
+  },
+  {
+    question: "Can you build PCs or servers for us?",
+    answer:
+      "Yes. We spec and assemble workstations, creator/engineering rigs, NAS units, and small-business servers. Builds include burn-in, imaging, and deployment so machines arrive ready for production.",
   },
   {
     question: "What happens when something breaks outside business hours?",
     answer:
-      "Reach out anyway. Emergencies don't keep a schedule, and we triage urgent outages as they come in. We'll let you know right away what we can do and when.",
+      "Reach out anyway. Urgent outages get triage as they come in. We will tell you immediately what we can do and when we can be hands-on.",
   },
   {
-    question: "Do I need an ongoing contract, or can I call you for one-time fixes?",
+    question: "Do I need an ongoing contract?",
     answer:
-      "No contract required. We handle one-time break/fix jobs all the time. Ongoing system administration keeps problems from happening in the first place, and many clients move to regular support after a one-off fix.",
+      "No contract required for break/fix or one-off builds. Many clients start there and move to managed administration once they see the value of proactive care.",
   },
   {
     question: "What technologies do you support?",
     answer:
-      "Windows and Linux servers, workstations and laptops, networking and Wi-Fi, email and cloud platforms like Microsoft 365 and Google Workspace, backups, and most business software. If it plugs in or connects to the internet, we can probably help.",
-  },
-  {
-    question: "How quickly do you respond?",
-    answer:
-      "Same-day response for most requests. Urgent outages get priority. You work directly with an engineer, not a ticket queue.",
+      "Windows and Linux servers, workstations and laptops, networking and Wi-Fi, Microsoft 365 / Google Workspace, backups, virtualization, and most business software. If it boots or routes packets, we can probably help.",
   },
 ];
 
@@ -299,29 +349,32 @@ export function Faq() {
   return (
     <section id="faq" className="py-20 sm:py-28">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <div className="max-w-xl">
           <p className="section-label">FAQ</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Common questions
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Straight answers
           </h2>
-          <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-navy-400">
-            Quick answers about how we work. Don&apos;t see yours?{" "}
-            <a href="#contact" className="text-brand-pink-light underline-offset-4 hover:underline">
-              Just ask.
+          <p className="mt-4 text-base leading-relaxed text-ink-400">
+            Quick notes on how we work. Missing something?{" "}
+            <a href="#contact" className="text-signal-bright underline-offset-4 hover:underline">
+              Ask us.
             </a>
           </p>
         </div>
 
-        <div className="mt-12 space-y-3">
+        <div className="mt-12 space-y-2">
           {faqs.map((faq) => (
-            <details key={faq.question} className="faq-item glass-card group rounded-2xl">
+            <details
+              key={faq.question}
+              className="faq-item group rounded-lg border border-white/8 bg-white/[0.02]"
+            >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
                 <span className="text-sm font-semibold text-white sm:text-base">
                   {faq.question}
                 </span>
                 <span
                   aria-hidden
-                  className="faq-chevron flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/5 text-navy-300 transition-transform duration-300"
+                  className="faq-chevron flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-white/5 text-ink-300 transition-transform duration-300"
                 >
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
@@ -329,7 +382,7 @@ export function Faq() {
                 </span>
               </summary>
               <div className="px-5 pb-5 sm:px-6 sm:pb-6">
-                <p className="border-t border-white/6 pt-4 text-sm leading-relaxed text-navy-300">
+                <p className="border-t border-white/6 pt-4 text-sm leading-relaxed text-ink-300">
                   {faq.answer}
                 </p>
               </div>
@@ -345,39 +398,37 @@ export function Contact() {
   return (
     <section id="contact" className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="gradient-border">
-          <div className="gradient-border-inner px-6 py-14 sm:px-12 sm:py-16">
-            <div className="mx-auto max-w-2xl">
-              <div className="text-center">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-purple/30 to-brand-pink/20 text-brand-pink-light ring-1 ring-white/10">
-                  <MailIcon className="h-6 w-6" />
-                </div>
-                <h2 className="mt-6 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                  Ready to get started?
-                </h2>
-                <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-navy-400">
-                  Tell us what you need: ongoing support, an emergency fix, or a
-                  one-time project. We&apos;ll get back to you quickly.
-                </p>
+        <div className="panel rounded-xl px-6 py-14 sm:px-12 sm:py-16">
+          <div className="mx-auto max-w-2xl">
+            <div className="text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-md border border-signal/30 bg-signal/10 text-signal-bright">
+                <MailIcon className="h-5 w-5" />
               </div>
-
-              <div className="mt-10">
-                <ContactForm />
-              </div>
-
-              <p className="mt-8 text-center text-sm text-navy-400">
-                Prefer email?{" "}
-                <a
-                  href="mailto:hello@ashpacket.com"
-                  className="text-brand-pink-light underline-offset-4 hover:underline"
-                >
-                  hello@ashpacket.com
-                </a>
-              </p>
-              <p className="mt-2 text-center font-mono text-xs text-navy-500">
-                Remote &amp; on-site support available
+              <h2 className="mt-6 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                Ready when you are
+              </h2>
+              <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-ink-400">
+                Managed support, an outage, or a custom build—tell us what you
+                need and we will respond quickly.
               </p>
             </div>
+
+            <div className="mt-10">
+              <ContactForm />
+            </div>
+
+            <p className="mt-8 text-center text-sm text-ink-400">
+              Prefer email?{" "}
+              <a
+                href="mailto:hello@ashpacket.com"
+                className="text-signal-bright underline-offset-4 hover:underline"
+              >
+                hello@ashpacket.com
+              </a>
+            </p>
+            <p className="mt-2 text-center font-mono text-xs text-ink-500">
+              Remote &amp; on-site · MSP · Sysadmin · Builds
+            </p>
           </div>
         </div>
       </div>
@@ -392,13 +443,16 @@ export function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
             <p className="text-sm font-semibold text-white">AshPacket LLC</p>
-            <p className="mt-1 text-sm text-navy-500">
-              IT Consulting &amp; Support
+            <p className="mt-1 text-sm text-ink-500">
+              Managed IT · Sysadmin · Custom Builds
             </p>
           </div>
-          <nav className="flex flex-wrap justify-center gap-6 text-sm text-navy-400">
+          <nav className="flex flex-wrap justify-center gap-6 text-sm text-ink-400">
             <a href="#services" className="transition-colors hover:text-white">
               Services
+            </a>
+            <a href="#builds" className="transition-colors hover:text-white">
+              Builds
             </a>
             <a href="#about" className="transition-colors hover:text-white">
               About
@@ -410,7 +464,7 @@ export function Footer() {
               Contact
             </a>
           </nav>
-          <p className="text-center text-xs text-navy-600 md:text-right">
+          <p className="text-center text-xs text-ink-600 md:text-right">
             &copy; {new Date().getFullYear()} AshPacket LLC
           </p>
         </div>

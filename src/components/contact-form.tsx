@@ -36,20 +36,23 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-6 py-10 text-center">
+      <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-6 py-10 text-center">
         <p className="text-lg font-semibold text-white">Message sent</p>
-        <p className="mt-2 text-sm text-navy-300">
+        <p className="mt-2 text-sm text-ink-300">
           Thanks for reaching out. We&apos;ll get back to you shortly.
         </p>
       </div>
     );
   }
 
+  const fieldClass =
+    "w-full rounded-lg border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-white sm:text-sm placeholder:text-ink-500 focus:border-signal focus:outline-none focus:ring-1 focus:ring-signal";
+
   return (
     <form onSubmit={handleSubmit} className="text-left">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-navy-200">
+          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink-200">
             Name
           </label>
           <input
@@ -58,12 +61,12 @@ export function ContactForm() {
             type="text"
             required
             autoComplete="name"
-            className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-white sm:text-sm placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
+            className={fieldClass}
             placeholder="Your name"
           />
         </div>
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-navy-200">
+          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ink-200">
             Email
           </label>
           <input
@@ -72,13 +75,30 @@ export function ContactForm() {
             type="email"
             required
             autoComplete="email"
-            className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-white sm:text-sm placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
+            className={fieldClass}
             placeholder="you@company.com"
           />
         </div>
       </div>
       <div className="mt-4">
-        <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-navy-200">
+        <label htmlFor="topic" className="mb-1.5 block text-sm font-medium text-ink-200">
+          Topic
+        </label>
+        <select
+          id="topic"
+          name="topic"
+          defaultValue="managed-it"
+          className={`${fieldClass} appearance-none`}
+        >
+          <option value="managed-it">Managed IT / MSP</option>
+          <option value="sysadmin">System administration</option>
+          <option value="builds">Custom PC / server build</option>
+          <option value="break-fix">Break / fix support</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+      <div className="mt-4">
+        <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-ink-200">
           How can we help?
         </label>
         <textarea
@@ -86,13 +106,13 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
-          className="w-full resize-y rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-white sm:text-sm placeholder:text-navy-500 focus:border-brand-purple focus:outline-none focus:ring-1 focus:ring-brand-purple"
-          placeholder="Tell us what's going on: an outage, a project, or ongoing support."
+          className={`${fieldClass} resize-y`}
+          placeholder="Outage, managed support, or a build brief—whatever you need."
         />
       </div>
 
       {status === "error" && (
-        <p className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+        <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           Something went wrong sending your message. Please try again, or email
           us directly at{" "}
           <a href="mailto:hello@ashpacket.com" className="underline underline-offset-2">
@@ -105,7 +125,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="btn-brand mt-6 w-full rounded-xl px-8 py-3.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+        className="btn-brand mt-6 w-full rounded-lg px-8 py-3.5 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
       >
         {status === "sending" ? "Sending..." : "Send message"}
       </button>

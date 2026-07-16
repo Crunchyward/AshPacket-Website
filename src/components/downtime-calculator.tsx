@@ -25,7 +25,7 @@ function Slider({ id, label, value, min, max, step, display, onChange }: SliderP
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <label htmlFor={id} className="text-sm font-medium text-navy-200">
+        <label htmlFor={id} className="text-sm font-medium text-ink-200">
           {label}
         </label>
         <span className="font-mono text-sm font-semibold text-white">{display}</span>
@@ -40,7 +40,7 @@ function Slider({ id, label, value, min, max, step, display, onChange }: SliderP
         onChange={(event) => onChange(Number(event.target.value))}
         className="slider-brand mt-3 w-full cursor-pointer"
       />
-      <div className="mt-1 flex justify-between font-mono text-[10px] text-navy-500">
+      <div className="mt-1 flex justify-between font-mono text-[10px] text-ink-500">
         <span>{min}</span>
         <span>{max}</span>
       </div>
@@ -59,19 +59,19 @@ export function DowntimeCalculator() {
   return (
     <section id="calculator" className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <p className="section-label">Downtime calculator</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        <div className="max-w-2xl">
+          <p className="section-label">Downtime cost</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             What does an outage cost you?
           </h2>
-          <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-navy-400">
-            Move the sliders to estimate what your business loses in wages alone
-            when systems go down.
+          <p className="mt-4 max-w-md text-base leading-relaxed text-ink-400">
+            Estimate wage loss alone when systems go dark—then decide whether
+            proactive MSP coverage pays for itself.
           </p>
         </div>
 
-        <div className="mx-auto mt-12 max-w-4xl">
-          <div className="glass-panel rounded-2xl p-6 sm:p-8">
+        <div className="mt-12 max-w-4xl">
+          <div className="panel rounded-xl p-6 sm:p-8">
             <div className="grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
               <div className="space-y-7">
                 <Slider
@@ -108,23 +108,23 @@ export function DowntimeCalculator() {
 
               <div aria-hidden className="hidden h-full w-px bg-white/8 lg:block" />
 
-              <div className="text-center">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-navy-500">
+              <div className="text-center lg:text-left">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
                   Estimated cost of this outage
                 </p>
-                <p className="mt-2 text-4xl font-bold text-gradient-brand sm:text-5xl">
+                <p className="mt-2 text-4xl font-semibold text-gradient-signal sm:text-5xl">
                   {formatMoney(outageCost)}
                 </p>
-                <p className="mt-3 text-sm text-navy-400">
+                <p className="mt-3 text-sm text-ink-400">
                   {formatMoney(costPerHour)} in lost wages every hour
                 </p>
                 <a
                   href="#contact"
-                  className="btn-brand mt-6 inline-block w-full rounded-xl px-7 py-3.5 text-sm font-semibold text-white sm:w-auto sm:py-3"
+                  className="btn-brand mt-6 inline-block w-full rounded-lg px-7 py-3.5 text-sm font-semibold sm:w-auto sm:py-3"
                 >
-                  Stop losing money
+                  Protect uptime
                 </a>
-                <p className="mx-auto mt-4 max-w-[16rem] text-xs leading-relaxed text-navy-500">
+                <p className="mt-4 max-w-[18rem] text-xs leading-relaxed text-ink-500 lg:mx-0 mx-auto">
                   Wages only. Lost sales, missed deadlines, and recovery work
                   usually push the real number higher.
                 </p>
