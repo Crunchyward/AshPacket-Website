@@ -1,6 +1,7 @@
 import { DowntimeCalculator } from "@/components/downtime-calculator";
 import { Header } from "@/components/header";
 import {
+  Builds,
   Contact,
   Faq,
   Footer,
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <Builds />
         <DowntimeCalculator />
         <WhyUs />
         <Process />

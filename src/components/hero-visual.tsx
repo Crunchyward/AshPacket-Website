@@ -1,71 +1,103 @@
 export function HeroVisual() {
-  const servers = [
-    { name: "prod-web-01", status: "Healthy", uptime: "99.98%", load: 34 },
-    { name: "prod-db-01", status: "Healthy", uptime: "99.99%", load: 52 },
-    { name: "backup-srv", status: "Syncing", uptime: "100%", load: 18 },
+  const racks = [
+    { id: "RACK-A", leds: [true, true, true, false, true, true] },
+    { id: "RACK-B", leds: [true, true, false, true, true, true] },
+    { id: "RACK-C", leds: [true, false, true, true, true, false] },
+  ];
+
+  const nodes = [
+    { name: "edge-fw-01", role: "Firewall", load: 28 },
+    { name: "app-node-02", role: "App host", load: 61 },
+    { name: "nas-backup", role: "Storage", load: 44 },
   ];
 
   return (
-    <div className="animate-fade-up-delay-2 relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
-      <div
-        aria-hidden
-        className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-brand-purple/20 via-brand-pink/10 to-transparent blur-2xl"
-      />
-      <div className="glass-panel animate-float relative overflow-hidden rounded-2xl p-5 sm:p-6">
-        <div className="mb-5 flex items-center justify-between border-b border-white/8 pb-4">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-navy-400">
-              Infrastructure Monitor
-            </p>
-            <p className="mt-0.5 text-sm font-semibold text-white">AshPacket Dashboard</p>
-          </div>
-          <div className="flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1">
-            <span className="status-dot h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            <span className="font-mono text-[10px] text-emerald-300">All systems go</span>
-          </div>
-        </div>
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+    >
+      <div className="hero-plane" />
+      <div className="hero-scan" />
 
-        <div className="space-y-3">
-          {servers.map((server) => (
+      {/* Dominant rack / ops plane — full-bleed right side */}
+      <div className="absolute inset-y-0 right-0 hidden w-[55%] lg:block">
+        <div className="absolute inset-0 bg-gradient-to-l from-ink-950 via-ink-950/40 to-transparent" />
+        <div className="absolute inset-y-10 right-8 left-8 flex gap-4 opacity-90">
+          {racks.map((rack, ri) => (
             <div
-              key={server.name}
-              className="rounded-xl border border-white/6 bg-white/[0.03] p-3.5"
+              key={rack.id}
+              className="flex flex-1 flex-col gap-1.5 rounded-sm border border-white/10 bg-ink-900/70 p-2"
+              style={{ transform: `translateY(${ri * 12}px)` }}
             >
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5">
-                  <span
-                    className={`h-2 w-2 shrink-0 rounded-full ${
-                      server.status === "Healthy" ? "bg-emerald-400" : "bg-brand-amber"
-                    }`}
-                  />
-                  <span className="font-mono text-xs text-navy-200">{server.name}</span>
-                </div>
-                <span className="font-mono text-[10px] text-navy-500">{server.uptime}</span>
+              <div className="mb-1 flex items-center justify-between px-1">
+                <span className="font-mono text-[9px] tracking-widest text-ink-500">
+                  {rack.id}
+                </span>
+                <span className="rack-led h-1.5 w-1.5 rounded-full bg-signal" style={{ animationDelay: `${ri * 0.4}s` }} />
               </div>
-              <div className="mt-2.5 flex items-center gap-3">
-                <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-navy-800">
+              {rack.leds.map((on, i) => (
+                <div
+                  key={`${rack.id}-${i}`}
+                  className="relative h-7 overflow-hidden rounded-[2px] border border-white/6 bg-ink-950/80"
+                >
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-brand-purple to-brand-pink"
-                    style={{ width: `${server.load}%` }}
+                    className={`absolute left-2 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full ${
+                      on ? "bg-signal rack-led" : "bg-ink-700"
+                    }`}
+                    style={{ animationDelay: `${i * 0.25 + ri * 0.15}s` }}
                   />
+                  <div className="absolute inset-x-8 top-1/2 h-px -translate-y-1/2 bg-white/8" />
+                  {on && (
+                    <div
+                      className="rack-bar absolute inset-y-2 left-8 right-3 opacity-40"
+                      style={{ width: `${35 + ((i * 17 + ri * 11) % 45)}%` }}
+                    />
+                  )}
                 </div>
-                <span className="font-mono text-[10px] text-navy-400">{server.load}%</span>
-              </div>
+              ))}
             </div>
           ))}
         </div>
 
-        <div className="mt-4 grid grid-cols-3 gap-2 border-t border-white/6 pt-4">
-          {[
-            { label: "Tickets", value: "0 open" },
-            { label: "Backups", value: "OK" },
-            { label: "Alerts", value: "None" },
-          ].map((stat) => (
-            <div key={stat.label} className="rounded-lg bg-white/[0.03] px-2 py-2 text-center">
-              <p className="font-mono text-[9px] uppercase tracking-wider text-navy-500">
-                {stat.label}
-              </p>
-              <p className="mt-0.5 text-xs font-medium text-white">{stat.value}</p>
+        {/* Terminal readout overlay — part of the visual plane, not a floating badge */}
+        <div className="absolute bottom-16 left-10 right-16 panel rounded-lg p-4">
+          <div className="mb-3 flex items-center justify-between border-b border-white/8 pb-2">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">
+              ashpacketctl status
+            </p>
+            <span className="font-mono text-[10px] text-signal">LIVE</span>
+          </div>
+          <div className="space-y-2">
+            {nodes.map((node) => (
+              <div key={node.name} className="flex items-center gap-3">
+                <span className="status-dot h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+                <span className="w-28 font-mono text-[11px] text-ink-200">{node.name}</span>
+                <span className="flex-1 font-mono text-[10px] text-ink-500">{node.role}</span>
+                <div className="h-1 w-16 overflow-hidden rounded-full bg-ink-800">
+                  <div className="h-full bg-signal" style={{ width: `${node.load}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="sweep-line absolute top-1/3 h-px w-1/3 bg-gradient-to-r from-transparent via-signal/50 to-transparent" />
+      </div>
+
+      {/* Mobile / tablet atmosphere — simplified rack silhouette */}
+      <div className="absolute inset-x-0 bottom-0 h-48 opacity-40 lg:hidden">
+        <div className="mx-auto flex h-full max-w-md gap-2 px-6 pb-4">
+          {racks.map((rack) => (
+            <div
+              key={`m-${rack.id}`}
+              className="flex flex-1 flex-col justify-end gap-1 border border-white/8 bg-ink-900/50 p-1.5"
+            >
+              {rack.leds.slice(0, 4).map((on, i) => (
+                <div
+                  key={i}
+                  className={`h-3 border border-white/5 ${on ? "bg-signal/20" : "bg-ink-950/60"}`}
+                />
+              ))}
             </div>
           ))}
         </div>

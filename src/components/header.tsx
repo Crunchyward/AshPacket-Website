@@ -5,6 +5,7 @@ import { Logo } from "@/components/logo";
 
 const navLinks = [
   { href: "#services", label: "Services" },
+  { href: "#builds", label: "Builds" },
   { href: "#about", label: "About" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -60,7 +61,7 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? "border-b border-white/8 bg-navy-950/90 shadow-lg shadow-black/20 backdrop-blur-xl"
+          ? "border-b border-white/8 bg-ink-950/90 shadow-lg shadow-black/25 backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
@@ -74,14 +75,14 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-4 py-2 text-sm text-navy-300 transition-colors hover:bg-white/5 hover:text-white"
+              className="rounded-lg px-3.5 py-2 text-sm text-ink-300 transition-colors hover:bg-white/5 hover:text-white"
             >
               {link.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="btn-brand ml-2 rounded-xl px-5 py-2 text-sm font-semibold text-white"
+            className="btn-brand ml-2 rounded-lg px-5 py-2 text-sm font-semibold"
           >
             Get support
           </a>
@@ -89,7 +90,7 @@ export function Header() {
 
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/8 bg-white/5 text-navy-200 transition-colors hover:bg-white/10 hover:text-white md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/8 bg-white/5 text-ink-200 transition-colors hover:bg-white/10 hover:text-white md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -101,7 +102,7 @@ export function Header() {
 
       {open && (
         <div
-          className="fixed inset-0 top-[57px] z-40 bg-navy-950/60 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 top-[57px] z-40 bg-ink-950/60 backdrop-blur-sm md:hidden"
           aria-hidden
           onClick={close}
         />
@@ -109,8 +110,8 @@ export function Header() {
 
       <div
         id="mobile-nav"
-        className={`overflow-hidden border-t border-white/6 bg-navy-950/95 backdrop-blur-xl transition-all duration-300 ease-out md:hidden ${
-          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden border-t border-white/6 bg-ink-950/95 backdrop-blur-xl transition-all duration-300 ease-out md:hidden ${
+          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
         aria-hidden={!open}
       >
@@ -119,7 +120,7 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-xl px-4 py-3.5 text-base font-medium text-navy-200 transition-colors hover:bg-white/5 hover:text-white"
+              className="rounded-lg px-4 py-3.5 text-base font-medium text-ink-200 transition-colors hover:bg-white/5 hover:text-white"
               onClick={close}
             >
               {link.label}
@@ -127,7 +128,7 @@ export function Header() {
           ))}
           <a
             href="#contact"
-            className="btn-brand mt-2 rounded-xl px-4 py-3.5 text-center text-base font-semibold text-white"
+            className="btn-brand mt-2 rounded-lg px-4 py-3.5 text-center text-base font-semibold"
             onClick={close}
           >
             Get support
