@@ -117,7 +117,7 @@ export function HeroVisual() {
       <div className="hero-plane" />
       <div className="hero-scan" />
 
-      {/* Dominant rack / ops plane — full-bleed right side */}
+      {/* Dominant rack / ops plane: full-bleed right side */}
       <div className="absolute inset-y-0 right-0 hidden w-[56%] lg:block">
         <div className="absolute inset-0 bg-gradient-to-l from-ink-950 via-ink-950/50 to-transparent" />
         <div className="absolute bottom-36 top-24 right-8 left-6 flex gap-3">
@@ -162,7 +162,7 @@ export function HeroVisual() {
         <div className="sweep-line absolute top-[28%] h-px w-2/5 bg-gradient-to-r from-transparent via-signal/55 to-transparent" />
       </div>
 
-      {/* Mobile atmosphere — denser rack strip */}
+      {/* Mobile atmosphere: denser rack strip */}
       <div className="absolute inset-x-0 bottom-0 h-40 lg:hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/80 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 mx-auto flex h-28 max-w-lg gap-1.5 px-5 pb-3 opacity-70">

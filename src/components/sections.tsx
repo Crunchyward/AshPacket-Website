@@ -34,7 +34,7 @@ const services = [
     code: "03",
     title: "Custom PC & Server Builds",
     description:
-      "Workstations, NAS boxes, and rack servers built to spec—parts selection, assembly, burn-in, imaging, and handoff.",
+      "Workstations, NAS boxes, and rack servers built to spec: parts selection, assembly, burn-in, imaging, and handoff.",
     highlights: ["Workstation & gaming/pro builds", "Rack & tower servers", "Imaging & deployment"],
   },
   {
@@ -42,7 +42,7 @@ const services = [
     code: "04",
     title: "Break / Fix Support",
     description:
-      "When something fails, you get an engineer—not a script. Remote or on-site diagnosis with root-cause remediation.",
+      "When something fails, you get an engineer, not a script. Remote or on-site diagnosis with root-cause remediation.",
     highlights: ["Same-day triage", "Remote & on-site", "Root-cause fixes"],
   },
 ];
@@ -61,7 +61,7 @@ const values = [
   {
     icon: ShieldIcon,
     title: "Security-aware by default",
-    description: "Backups, least privilege, and sane baselines—balanced against what your budget can sustain.",
+    description: "Backups, least privilege, and sane baselines, balanced against what your budget can sustain.",
   },
 ];
 
@@ -105,7 +105,7 @@ export function Hero() {
           </h1>
           <p className="animate-fade-up-delay-2 mt-6 max-w-xl text-base leading-relaxed text-ink-300 sm:text-lg">
             Managed IT, hands-on system administration, and custom PC &amp; server
-            builds—so your team ships work, not tickets.
+            builds, so your team ships work, not tickets.
           </p>
 
           <div className="animate-fade-up-delay-3 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -139,7 +139,7 @@ export function Services() {
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink-400 sm:text-lg">
             From proactive managed support to emergency repair and purpose-built
-            machines—one team for the full stack.
+            machines: one team for the full stack.
           </p>
         </div>
 
@@ -191,7 +191,7 @@ export function Builds() {
             </h2>
             <p className="mt-4 leading-relaxed text-ink-400">
               Need a quiet office PC, a render workstation, or a small business
-              server that just works? We build to your workload—not a retail SKU.
+              server that just works? We build to your workload, not a retail SKU.
             </p>
             <a
               href="#contact"
@@ -232,7 +232,7 @@ export function WhyUs() {
             <div>
               <p className="section-label">Why AshPacket</p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                An engineer on call—not a help desk script
+                An engineer on call, not a help desk script
               </h2>
               <p className="mt-4 leading-relaxed text-ink-400">
                 AshPacket is built on years of hands-on systems work: servers,
@@ -316,7 +316,7 @@ const faqs = [
   {
     question: "What size businesses do you work with?",
     answer:
-      "Mostly small and mid-size organizations—from solo operators to teams with dozens of seats. If you need MSP-style coverage without a full-time IT department, we fill that role.",
+      "Mostly small and mid-size organizations, from solo operators to teams with dozens of seats. If you need MSP-style coverage without a full-time IT department, we fill that role.",
   },
   {
     question: "Do you offer remote support, on-site, or both?",
@@ -408,7 +408,7 @@ export function Contact() {
                 Ready when you are
               </h2>
               <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-ink-400">
-                Managed support, an outage, or a custom build—tell us what you
+                Managed support, an outage, or a custom build. Tell us what you
                 need and we will respond quickly.
               </p>
             </div>

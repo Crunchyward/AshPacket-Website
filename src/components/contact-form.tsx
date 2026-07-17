@@ -107,7 +107,7 @@ export function ContactForm() {
           required
           rows={5}
           className={`${fieldClass} resize-y`}
-          placeholder="Outage, managed support, or a build brief—whatever you need."
+          placeholder="Outage, managed support, or a build brief, whatever you need."
         />
       </div>
 
