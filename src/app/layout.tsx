@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/og-image.png`,
         width: 1024,
         height: 683,
-        alt: "AshPacket LLC — Managed IT, Sysadmin & Custom Builds",
+        alt: "AshPacket LLC | Managed IT, Sysadmin & Custom Builds",
       },
     ],
   },

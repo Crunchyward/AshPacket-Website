@@ -65,7 +65,7 @@ export function DowntimeCalculator() {
             What does an outage cost you?
           </h2>
           <p className="mt-4 max-w-md text-base leading-relaxed text-ink-400">
-            Estimate wage loss alone when systems go dark—then decide whether
+            Estimate wage loss alone when systems go dark, then decide whether
             proactive MSP coverage pays for itself.
           </p>
         </div>
