@@ -1,0 +1,18 @@
+# Dokploy / Nixpacks config for this static Next.js export.
+# In Dokploy:
+#   Build Type = Nixpacks
+#   Publish Directory = out
+# Or use Build Type = Dockerfile with the included Dockerfile.
+
+[phases.setup]
+nixPkgs = ["nodejs_24"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[variables]
+NEXT_TELEMETRY_DISABLED = "1"
+NEXT_PUBLIC_BASE_PATH = ""
