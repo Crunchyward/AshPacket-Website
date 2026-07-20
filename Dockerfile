@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # Build static Next.js export, then serve with nginx (Dokploy-friendly).
+# Listens on PORT (default 3000) so Dokploy's common app port works.
 ARG NODE_VERSION=24
 
 FROM node:${NODE_VERSION}-alpine AS deps
@@ -28,11 +29,19 @@ RUN npm run build \
   && test -n "$(ls -A out)"
 
 FROM nginx:1.27-alpine AS runner
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+
+# Dokploy proxies to this port by default for many app templates.
+ENV PORT=3000
+# Only substitute PORT (keep nginx `$uri` etc. intact).
+ENV NGINX_ENVSUBST_FILTER=^PORT$
+
+# Remove default site; entrypoint renders templates into conf.d/
+RUN rm -f /etc/nginx/conf.d/default.conf
+COPY docker/nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=builder /app/out /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget -qO- http://127.0.0.1/ >/dev/null || exit 1
+  CMD wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1
 
 CMD ["nginx", "-g", "daemon off;"]
