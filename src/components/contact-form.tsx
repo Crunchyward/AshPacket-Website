@@ -87,10 +87,12 @@ export function ContactForm() {
         <select
           id="topic"
           name="topic"
-          defaultValue="managed-it"
+          defaultValue="managed-it-pro"
           className={`${fieldClass} appearance-none`}
         >
-          <option value="managed-it">Managed IT / MSP</option>
+          <option value="managed-it-starter">Managed IT plan: Starter</option>
+          <option value="managed-it-pro">Managed IT plan: Pro</option>
+          <option value="managed-it-managed">Managed IT plan: Managed</option>
           <option value="sysadmin">System administration</option>
           <option value="builds">Custom PC / server build</option>
           <option value="break-fix">Break / fix support</option>

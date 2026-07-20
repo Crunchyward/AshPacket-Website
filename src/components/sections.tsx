@@ -128,6 +128,62 @@ export function Hero() {
   );
 }
 
+const plans = [
+  {
+    name: "Starter",
+    price: "$40",
+    cadence: "/mo",
+    summary: "Solid coverage for a single host or small stack that needs backups and light maintenance.",
+    features: [
+      "Up to 3TB backup storage",
+      "Server updates 2x monthly",
+      "Ticket support",
+      "Basic uptime checks",
+    ],
+    cta: "Start with Starter",
+    featured: false,
+  },
+  {
+    name: "Pro",
+    price: "$85",
+    cadence: "/mo",
+    summary: "Weekly care and monitoring for communities and businesses that cannot afford quiet failures.",
+    features: [
+      "Up to 6TB backup storage",
+      "Weekly updates and patching",
+      "Performance monitoring",
+      "Priority tickets + Discord support",
+      "Change log for major updates",
+    ],
+    cta: "Choose Pro",
+    featured: true,
+  },
+  {
+    name: "Managed",
+    price: "$150",
+    cadence: "/mo",
+    summary: "Full remote administration when you want AshPacket running the server like an in-house admin.",
+    features: [
+      "Up to 10TB backup storage",
+      "Full server management (updates, hardening, optimization)",
+      "24-48hr response SLA",
+      "Monthly health report",
+      "Emergency restore assistance",
+      "Security review cadence",
+    ],
+    cta: "Go Managed",
+    featured: false,
+  },
+];
+
+const planCoverage = [
+  "Game servers and community hosts",
+  "Small business Windows / Linux servers",
+  "Backup, restore, and storage ops",
+  "Updates, patching, and troubleshooting",
+  "Security hardening and access hygiene",
+];
+
 export function Services() {
   return (
     <section id="services" className="relative py-20 sm:py-28">
@@ -173,6 +229,113 @@ export function Services() {
               </ul>
             </article>
           ))}
+        </div>
+
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <a
+            href="#plans"
+            className="btn-brand inline-flex rounded-lg px-6 py-3 text-sm font-semibold"
+          >
+            View Managed IT plans
+          </a>
+          <p className="text-sm text-ink-500">
+            Retainers for game servers, communities, and small businesses.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Plans() {
+  return (
+    <section id="plans" className="relative py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="section-label">Services / Managed IT Plans</p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Managed IT &amp; system administration
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-ink-400 sm:text-lg">
+            Remote IT support for game servers, communities, and small businesses.
+            Server setup and maintenance, backups, troubleshooting, and security,
+            with one point of contact for all of it.
+          </p>
+        </div>
+
+        <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-y border-white/8 py-5 text-sm text-ink-300">
+          {planCoverage.map((item) => (
+            <li key={item} className="inline-flex items-center gap-2">
+              <span className="h-1 w-1 rounded-full bg-signal" />
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {plans.map((plan) => (
+            <article
+              key={plan.name}
+              className={`relative flex flex-col rounded-xl border p-6 sm:p-7 ${
+                plan.featured
+                  ? "border-signal/45 bg-signal/[0.06]"
+                  : "border-white/10 bg-white/[0.02]"
+              }`}
+            >
+              {plan.featured && (
+                <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-signal">
+                  Most popular
+                </p>
+              )}
+              <h3 className="text-xl font-semibold text-white">{plan.name}</h3>
+              <p className="mt-3 flex items-baseline gap-1">
+                <span className="text-4xl font-semibold tracking-tight text-white">
+                  {plan.price}
+                </span>
+                <span className="text-sm text-ink-500">{plan.cadence}</span>
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-ink-400">{plan.summary}</p>
+              <ul className="mt-6 flex-1 space-y-2.5 border-t border-white/8 pt-6">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex gap-2.5 text-sm text-ink-200">
+                    <span className="mt-2 h-px w-3 shrink-0 bg-signal/80" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={`#contact`}
+                className={`mt-8 block rounded-lg px-5 py-3 text-center text-sm font-semibold ${
+                  plan.featured
+                    ? "btn-brand"
+                    : "btn-ghost text-ink-100"
+                }`}
+              >
+                {plan.cta}
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-10 grid gap-4 border border-white/8 bg-white/[0.02] px-5 py-6 sm:grid-cols-2 sm:px-7">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-signal">
+              Custom work
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-300">
+              Custom projects and one-time work (migrations, rebuilds, security
+              cleanups, new server standups) are quoted separately.
+            </p>
+          </div>
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-signal">
+              New client offer
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-300">
+              New clients get 15% off month one on any Managed IT plan. Mention
+              the offer when you reach out and we will apply it to your first invoice.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -336,12 +499,17 @@ const faqs = [
   {
     question: "Do I need an ongoing contract?",
     answer:
-      "No contract required for break/fix or one-off builds. Many clients start there and move to managed administration once they see the value of proactive care.",
+      "No contract required for break/fix or one-off builds. Managed IT plans are month-to-month retainers you can start or stop as needed. Many clients begin with a one-off fix, then move onto Starter, Pro, or Managed.",
+  },
+  {
+    question: "What is included in Managed IT plans?",
+    answer:
+      "Remote support for game servers, communities, and small businesses: setup and maintenance, backups, troubleshooting, and security. Starter is $40/mo, Pro is $85/mo, and Managed is $150/mo. Custom projects are quoted separately, and new clients get 15% off month one.",
   },
   {
     question: "What technologies do you support?",
     answer:
-      "Windows and Linux servers, workstations and laptops, networking and Wi-Fi, Microsoft 365 / Google Workspace, backups, virtualization, and most business software. If it boots or routes packets, we can probably help.",
+      "Windows and Linux servers, workstations and laptops, networking and Wi-Fi, Microsoft 365 / Google Workspace, backups, virtualization, game server hosts, and most business software. If it boots or routes packets, we can probably help.",
   },
 ];
 
@@ -450,6 +618,9 @@ export function Footer() {
           <nav className="flex flex-wrap justify-center gap-6 text-sm text-ink-400">
             <a href="#services" className="transition-colors hover:text-white">
               Services
+            </a>
+            <a href="#plans" className="transition-colors hover:text-white">
+              Plans
             </a>
             <a href="#builds" className="transition-colors hover:text-white">
               Builds

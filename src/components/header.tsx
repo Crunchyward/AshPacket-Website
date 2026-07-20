@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/logo";
 
 const navLinks = [
-  { href: "#services", label: "Services" },
   { href: "#builds", label: "Builds" },
   { href: "#about", label: "About" },
   { href: "#faq", label: "FAQ" },
+];
+
+const serviceSubLinks = [
+  { href: "#services", label: "Overview", desc: "MSP, sysadmin, builds, break/fix" },
+  { href: "#plans", label: "Managed IT Plans", desc: "Starter, Pro, and Managed retainers" },
 ];
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -29,9 +33,26 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      aria-hidden
+      className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -49,13 +70,37 @@ export function Header() {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth >= 768) setOpen(false);
+      if (window.innerWidth >= 768) {
+        setOpen(false);
+      } else {
+        setServicesOpen(false);
+      }
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const close = () => setOpen(false);
+  useEffect(() => {
+    const onPointerDown = (event: MouseEvent) => {
+      if (!servicesRef.current?.contains(event.target as Node)) {
+        setServicesOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setServicesOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
+  const close = () => {
+    setOpen(false);
+    setServicesOpen(false);
+  };
 
   return (
     <header
@@ -71,6 +116,39 @@ export function Header() {
         </a>
 
         <nav className="hidden items-center gap-1 md:flex">
+          <div className="relative" ref={servicesRef}>
+            <button
+              type="button"
+              className="inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm text-ink-300 transition-colors hover:bg-white/5 hover:text-white"
+              aria-expanded={servicesOpen}
+              aria-haspopup="menu"
+              onClick={() => setServicesOpen((prev) => !prev)}
+            >
+              Services
+              <ChevronIcon open={servicesOpen} />
+            </button>
+
+            {servicesOpen && (
+              <div
+                role="menu"
+                className="absolute left-0 top-full z-50 mt-2 w-72 overflow-hidden rounded-lg border border-white/10 bg-ink-950/95 p-1.5 shadow-xl shadow-black/40 backdrop-blur-xl"
+              >
+                {serviceSubLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    role="menuitem"
+                    href={link.href}
+                    className="block rounded-md px-3.5 py-3 transition-colors hover:bg-white/5"
+                    onClick={close}
+                  >
+                    <span className="block text-sm font-medium text-white">{link.label}</span>
+                    <span className="mt-0.5 block text-xs text-ink-400">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -111,11 +189,25 @@ export function Header() {
       <div
         id="mobile-nav"
         className={`overflow-hidden border-t border-white/6 bg-ink-950/95 backdrop-blur-xl transition-all duration-300 ease-out md:hidden ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
         }`}
         aria-hidden={!open}
       >
         <nav className="relative z-50 mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
+          <p className="px-4 pb-1 pt-2 font-mono text-[10px] uppercase tracking-widest text-ink-500">
+            Services
+          </p>
+          {serviceSubLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="rounded-lg px-4 py-3 text-base font-medium text-ink-200 transition-colors hover:bg-white/5 hover:text-white"
+              onClick={close}
+            >
+              {link.label}
+              <span className="mt-0.5 block text-sm font-normal text-ink-500">{link.desc}</span>
+            </a>
+          ))}
           {navLinks.map((link) => (
             <a
               key={link.href}
