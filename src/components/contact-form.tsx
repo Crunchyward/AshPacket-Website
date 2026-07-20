@@ -117,8 +117,8 @@ export function ContactForm() {
         <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
           Something went wrong sending your message. Please try again, or email
           us directly at{" "}
-          <a href="mailto:hello@ashpacket.com" className="underline underline-offset-2">
-            hello@ashpacket.com
+          <a href="mailto:support@ashpacket.net" className="underline underline-offset-2">
+            support@ashpacket.net
           </a>
           .
         </p>

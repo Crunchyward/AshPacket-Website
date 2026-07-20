@@ -588,10 +588,10 @@ export function Contact() {
             <p className="mt-8 text-center text-sm text-ink-400">
               Prefer email?{" "}
               <a
-                href="mailto:hello@ashpacket.com"
+                href="mailto:support@ashpacket.net"
                 className="text-signal-bright underline-offset-4 hover:underline"
               >
-                hello@ashpacket.com
+                support@ashpacket.net
               </a>
             </p>
             <p className="mt-2 text-center font-mono text-xs text-ink-500">

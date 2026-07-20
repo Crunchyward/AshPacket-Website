@@ -61,7 +61,7 @@ const businessSchema = {
   name: "AshPacket LLC",
   description,
   url: siteUrl,
-  email: "hello@ashpacket.com",
+  email: "support@ashpacket.net",
   image: `${siteUrl}/ashpacket-logo.png`,
   priceRange: "$$",
   knowsAbout: [
