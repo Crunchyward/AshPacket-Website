@@ -6,6 +6,7 @@ import {
   Faq,
   Footer,
   Hero,
+  Plans,
   Process,
   Services,
   WhyUs,
@@ -18,6 +19,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <Plans />
         <Builds />
         <DowntimeCalculator />
         <WhyUs />
