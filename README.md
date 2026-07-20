@@ -50,16 +50,16 @@ This repo is a static Next.js export (`output: "export"`). Prefer one of these b
 5. Environment / build args:
    - `NEXT_PUBLIC_BASE_PATH` = empty (or `/` only if you truly need a subpath)
    - `NEXT_PUBLIC_SITE_URL` = `https://your-domain.com`
-6. Add a domain on port **80**, enable HTTPS.
-7. Deploy.
+6. Domain / app port: **3000** (container listens on 3000; a 502 Bad Gateway usually means Dokploy is pointed at the wrong port)
+7. Enable HTTPS, then Deploy.
 
 Local smoke test:
 
 ```bash
 docker build \
-  --build-arg NEXT_PUBLIC_SITE_URL=http://localhost:8080 \
+  --build-arg NEXT_PUBLIC_SITE_URL=http://localhost:3000 \
   -t ashpacket-website .
-docker run --rm -p 8080:80 ashpacket-website
+docker run --rm -p 3000:3000 ashpacket-website
 ```
 
 ### Option B: Nixpacks
