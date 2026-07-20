@@ -94,30 +94,30 @@ export function Hero() {
     <section className="relative min-h-[100svh] overflow-hidden">
       <HeroVisual />
 
-      <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pb-24 pt-28 sm:px-6 sm:pb-28 sm:pt-32 lg:px-8">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pb-36 pt-28 sm:px-6 sm:pb-32 sm:pt-32 lg:px-8 lg:pb-28">
         <div className="max-w-2xl">
           <p className="animate-fade-up font-mono text-xs tracking-[0.28em] text-signal uppercase">
             AshPacket LLC
           </p>
-          <h1 className="animate-fade-up-delay-1 mt-5 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.65rem]">
+          <h1 className="animate-fade-up-delay-1 mt-5 text-[2.15rem] font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.65rem]">
             Infrastructure that{" "}
             <span className="text-gradient-signal">stays online.</span>
           </h1>
-          <p className="animate-fade-up-delay-2 mt-6 max-w-xl text-base leading-relaxed text-ink-300 sm:text-lg">
+          <p className="animate-fade-up-delay-2 mt-5 max-w-xl text-base leading-relaxed text-ink-300 sm:mt-6 sm:text-lg">
             Managed IT, hands-on system administration, and custom PC &amp; server
             builds, so your team ships work, not tickets.
           </p>
 
-          <div className="animate-fade-up-delay-3 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="animate-fade-up-delay-3 mt-8 flex w-full flex-col gap-3 sm:mt-9 sm:w-auto sm:flex-row sm:items-center">
             <a
               href="#contact"
-              className="btn-brand rounded-lg px-7 py-3.5 text-center text-sm font-semibold"
+              className="btn-brand min-h-11 rounded-lg px-7 py-3.5 text-center text-sm font-semibold"
             >
               Talk to an engineer
             </a>
             <a
               href="#services"
-              className="btn-ghost rounded-lg px-7 py-3.5 text-center text-sm font-semibold text-ink-200"
+              className="btn-ghost min-h-11 rounded-lg px-7 py-3.5 text-center text-sm font-semibold text-ink-200"
             >
               Explore services
             </a>
@@ -231,10 +231,10 @@ export function Services() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-4">
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
           <a
             href="#plans"
-            className="btn-brand inline-flex rounded-lg px-6 py-3 text-sm font-semibold"
+            className="btn-brand inline-flex min-h-11 w-full items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold sm:w-auto"
           >
             View Managed IT plans
           </a>
@@ -263,10 +263,10 @@ export function Plans() {
           </p>
         </div>
 
-        <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-y border-white/8 py-5 text-sm text-ink-300">
+        <ul className="mt-8 grid gap-3 border-y border-white/8 py-5 text-sm text-ink-300 sm:flex sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
           {planCoverage.map((item) => (
             <li key={item} className="inline-flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-signal" />
+              <span className="h-1 w-1 shrink-0 rounded-full bg-signal" />
               {item}
             </li>
           ))}
@@ -276,9 +276,9 @@ export function Plans() {
           {plans.map((plan) => (
             <article
               key={plan.name}
-              className={`relative flex flex-col rounded-xl border p-6 sm:p-7 ${
+              className={`relative flex flex-col rounded-xl border p-5 sm:p-7 ${
                 plan.featured
-                  ? "border-signal/45 bg-signal/[0.06]"
+                  ? "order-first border-signal/45 bg-signal/[0.06] lg:order-none"
                   : "border-white/10 bg-white/[0.02]"
               }`}
             >
@@ -288,7 +288,7 @@ export function Plans() {
                 </p>
               )}
               <h3 className="text-xl font-semibold text-white">{plan.name}</h3>
-              <p className="mt-3 flex items-baseline gap-1">
+              <p className="mt-3 flex flex-wrap items-baseline gap-1">
                 <span className="text-4xl font-semibold tracking-tight text-white">
                   {plan.price}
                 </span>
@@ -299,13 +299,13 @@ export function Plans() {
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex gap-2.5 text-sm text-ink-200">
                     <span className="mt-2 h-px w-3 shrink-0 bg-signal/80" />
-                    <span>{feature}</span>
+                    <span className="min-w-0 break-words">{feature}</span>
                   </li>
                 ))}
               </ul>
               <a
-                href={`#contact`}
-                className={`mt-8 block rounded-lg px-5 py-3 text-center text-sm font-semibold ${
+                href="#contact"
+                className={`mt-8 block min-h-11 rounded-lg px-5 py-3 text-center text-sm font-semibold ${
                   plan.featured
                     ? "btn-brand"
                     : "btn-ghost text-ink-100"
@@ -317,7 +317,7 @@ export function Plans() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-4 border border-white/8 bg-white/[0.02] px-5 py-6 sm:grid-cols-2 sm:px-7">
+        <div className="mt-10 grid gap-6 border border-white/8 bg-white/[0.02] px-5 py-6 sm:grid-cols-2 sm:gap-4 sm:px-7">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-widest text-signal">
               Custom work
@@ -536,8 +536,8 @@ export function Faq() {
               key={faq.question}
               className="faq-item group rounded-lg border border-white/8 bg-white/[0.02]"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
-                <span className="text-sm font-semibold text-white sm:text-base">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-4 sm:gap-4 sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden">
+                <span className="min-w-0 text-left text-sm font-semibold text-white sm:text-base">
                   {faq.question}
                 </span>
                 <span
@@ -566,7 +566,7 @@ export function Contact() {
   return (
     <section id="contact" className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="panel rounded-xl px-6 py-14 sm:px-12 sm:py-16">
+        <div className="panel rounded-xl px-4 py-10 sm:px-12 sm:py-16">
           <div className="mx-auto max-w-2xl">
             <div className="text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-md border border-signal/30 bg-signal/10 text-signal-bright">
@@ -615,7 +615,7 @@ export function Footer() {
               Managed IT · Sysadmin · Custom Builds
             </p>
           </div>
-          <nav className="flex flex-wrap justify-center gap-6 text-sm text-ink-400">
+          <nav className="flex max-w-md flex-wrap justify-center gap-x-5 gap-y-3 text-sm text-ink-400">
             <a href="#services" className="transition-colors hover:text-white">
               Services
             </a>
