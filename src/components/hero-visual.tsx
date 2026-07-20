@@ -162,10 +162,10 @@ export function HeroVisual() {
         <div className="sweep-line absolute top-[28%] h-px w-2/5 bg-gradient-to-r from-transparent via-signal/55 to-transparent" />
       </div>
 
-      {/* Mobile atmosphere: denser rack strip */}
-      <div className="absolute inset-x-0 bottom-0 h-40 lg:hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/80 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto flex h-28 max-w-lg gap-1.5 px-5 pb-3 opacity-70">
+      {/* Mobile atmosphere: short rack strip tucked under content */}
+      <div className="absolute inset-x-0 bottom-0 h-28 sm:h-36 lg:hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/90 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 mx-auto flex h-16 max-w-lg gap-1.5 px-5 pb-2 opacity-45 sm:h-24 sm:opacity-55">
           {racks.map((rack, ri) => (
             <div
               key={`m-${rack.id}`}
@@ -177,10 +177,10 @@ export function HeroVisual() {
                   style={{ animationDelay: `${ri * 0.3}s` }}
                 />
               </div>
-              {rack.units.slice(0, 8).map((unit, i) => (
+              {rack.units.slice(0, 5).map((unit, i) => (
                 <div
                   key={i}
-                  className={`relative h-full min-h-[6px] flex-1 border border-white/5 ${
+                  className={`relative h-full min-h-[4px] flex-1 border border-white/5 ${
                     unit.on ? "bg-ink-950" : "bg-ink-950/40"
                   }`}
                 >

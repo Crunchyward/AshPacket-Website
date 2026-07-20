@@ -104,15 +104,15 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-all duration-300 ${
         scrolled || open
-          ? "border-b border-white/8 bg-ink-950/90 shadow-lg shadow-black/25 backdrop-blur-xl"
+          ? "border-b border-white/8 bg-ink-950/95 shadow-lg shadow-black/25 backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-        <a href="#" aria-label="AshPacket LLC home" onClick={close}>
-          <Logo className="h-8 w-auto sm:h-9" priority />
+        <a href="#" aria-label="AshPacket LLC home" onClick={close} className="min-w-0 shrink">
+          <Logo className="h-7 w-auto max-w-[11.5rem] sm:h-9 sm:max-w-none" priority />
         </a>
 
         <nav className="hidden items-center gap-1 md:flex">
@@ -180,7 +180,7 @@ export function Header() {
 
       {open && (
         <div
-          className="fixed inset-0 top-[57px] z-40 bg-ink-950/60 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 top-[calc(3.75rem+env(safe-area-inset-top))] z-40 bg-ink-950/70 backdrop-blur-sm md:hidden"
           aria-hidden
           onClick={close}
         />
@@ -188,20 +188,20 @@ export function Header() {
 
       <div
         id="mobile-nav"
-        className={`overflow-hidden border-t border-white/6 bg-ink-950/95 backdrop-blur-xl transition-all duration-300 ease-out md:hidden ${
-          open ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden border-t border-white/6 bg-ink-950 transition-all duration-300 ease-out md:hidden ${
+          open ? "max-h-[min(36rem,calc(100dvh-3.75rem-env(safe-area-inset-top)))] opacity-100" : "max-h-0 opacity-0"
         }`}
         aria-hidden={!open}
       >
-        <nav className="relative z-50 mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4 sm:px-6">
-          <p className="px-4 pb-1 pt-2 font-mono text-[10px] uppercase tracking-widest text-ink-500">
+        <nav className="relative z-50 mx-auto flex max-h-[min(36rem,calc(100dvh-3.75rem-env(safe-area-inset-top)))] max-w-7xl flex-col gap-1 overflow-y-auto overscroll-contain px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
+          <p className="px-4 pb-1 pt-1 font-mono text-[10px] uppercase tracking-widest text-ink-500">
             Services
           </p>
           {serviceSubLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-4 py-3 text-base font-medium text-ink-200 transition-colors hover:bg-white/5 hover:text-white"
+              className="rounded-lg px-4 py-3.5 text-base font-medium text-ink-200 transition-colors hover:bg-white/5 hover:text-white"
               onClick={close}
             >
               {link.label}
@@ -220,7 +220,7 @@ export function Header() {
           ))}
           <a
             href="#contact"
-            className="btn-brand mt-2 rounded-lg px-4 py-3.5 text-center text-base font-semibold"
+            className="btn-brand mt-2 min-h-11 rounded-lg px-4 py-3.5 text-center text-base font-semibold"
             onClick={close}
           >
             Get support

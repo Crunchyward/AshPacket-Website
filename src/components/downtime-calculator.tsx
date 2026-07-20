@@ -71,7 +71,7 @@ export function DowntimeCalculator() {
         </div>
 
         <div className="mt-12 max-w-4xl">
-          <div className="panel rounded-xl p-6 sm:p-8">
+          <div className="panel rounded-xl p-5 sm:p-8">
             <div className="grid gap-10 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
               <div className="space-y-7">
                 <Slider
@@ -112,7 +112,7 @@ export function DowntimeCalculator() {
                 <p className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
                   Estimated cost of this outage
                 </p>
-                <p className="mt-2 text-4xl font-semibold text-gradient-signal sm:text-5xl">
+                <p className="mt-2 text-[2.25rem] font-semibold leading-none text-gradient-signal sm:text-5xl">
                   {formatMoney(outageCost)}
                 </p>
                 <p className="mt-3 text-sm text-ink-400">
@@ -120,7 +120,7 @@ export function DowntimeCalculator() {
                 </p>
                 <a
                   href="#contact"
-                  className="btn-brand mt-6 inline-block w-full rounded-lg px-7 py-3.5 text-sm font-semibold sm:w-auto sm:py-3"
+                  className="btn-brand mt-6 inline-block min-h-11 w-full rounded-lg px-7 py-3.5 text-sm font-semibold sm:w-auto sm:py-3"
                 >
                   Protect uptime
                 </a>
