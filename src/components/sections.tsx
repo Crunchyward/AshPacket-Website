@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { HeroVisual } from "@/components/hero-visual";
 import {
@@ -238,12 +239,12 @@ export function Services() {
           >
             View Managed IT plans
           </a>
-          <a
-            href="#projects"
+          <Link
+            href="/projects"
             className="btn-ghost inline-flex min-h-11 w-full items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold text-ink-200 sm:w-auto"
           >
             One-time projects
-          </a>
+          </Link>
           <p className="text-sm text-ink-500">
             Retainers for game servers, communities, and small businesses.
           </p>
@@ -346,9 +347,9 @@ export function Plans() {
         </div>
         <p className="mt-6 text-sm text-ink-500">
           Need a one-off setup, migration, or hardening?{" "}
-          <a href="#projects" className="text-signal-bright underline-offset-4 hover:underline">
+          <Link href="/projects" className="text-signal-bright underline-offset-4 hover:underline">
             See fixed-price projects
-          </a>
+          </Link>
           .
         </p>
       </div>
@@ -404,13 +405,18 @@ export function Projects() {
     <section id="projects" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="section-label">Services / One-time Projects</p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <p className="section-label">One-time Projects</p>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Fixed-price projects
-          </h2>
+          </h1>
           <p className="mt-4 text-base leading-relaxed text-ink-400 sm:text-lg">
             Clear scope, clear price. Ideal when you need a setup, migration, or
-            cleanup without starting a monthly retainer.
+            cleanup without starting a monthly retainer. Looking for ongoing
+            coverage instead?{" "}
+            <Link href="/#plans" className="text-signal-bright underline-offset-4 hover:underline">
+              View Managed IT plans
+            </Link>
+            .
           </p>
         </div>
 
@@ -735,27 +741,27 @@ export function Footer() {
             </p>
           </div>
           <nav className="flex max-w-md flex-wrap justify-center gap-x-5 gap-y-3 text-sm text-ink-400">
-            <a href="#services" className="transition-colors hover:text-white">
+            <Link href="/#services" className="transition-colors hover:text-white">
               Services
-            </a>
-            <a href="#plans" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#plans" className="transition-colors hover:text-white">
               Plans
-            </a>
-            <a href="#projects" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/projects" className="transition-colors hover:text-white">
               Projects
-            </a>
-            <a href="#builds" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#builds" className="transition-colors hover:text-white">
               Builds
-            </a>
-            <a href="#about" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#about" className="transition-colors hover:text-white">
               About
-            </a>
-            <a href="#faq" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#faq" className="transition-colors hover:text-white">
               FAQ
-            </a>
-            <a href="#contact" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#contact" className="transition-colors hover:text-white">
               Contact
-            </a>
+            </Link>
           </nav>
           <p className="text-center text-xs text-ink-600 md:text-right">
             &copy; {new Date().getFullYear()} AshPacket LLC
