@@ -126,6 +126,10 @@ export function ContactForm() {
           <option value="managed-it-starter">Managed IT plan: Starter</option>
           <option value="managed-it-pro">Managed IT plan: Pro</option>
           <option value="managed-it-managed">Managed IT plan: Managed</option>
+          <option value="project-setup">One-time project: setup / rebuild</option>
+          <option value="project-migration">One-time project: migration</option>
+          <option value="project-hardening">One-time project: hardening</option>
+          <option value="project-other">One-time project: other</option>
           <option value="sysadmin">System administration</option>
           <option value="builds">Custom PC / server build</option>
           <option value="break-fix">Break / fix support</option>

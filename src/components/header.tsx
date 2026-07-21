@@ -12,6 +12,7 @@ const navLinks = [
 const serviceSubLinks = [
   { href: "#services", label: "Overview", desc: "MSP, sysadmin, builds, break/fix" },
   { href: "#plans", label: "Managed IT Plans", desc: "Starter, Pro, and Managed retainers" },
+  { href: "#projects", label: "One-time Projects", desc: "Fixed-price setups, migrations, and hardenings" },
 ];
 
 function MenuIcon({ open }: { open: boolean }) {

@@ -8,6 +8,7 @@ import {
   Hero,
   Plans,
   Process,
+  Projects,
   Services,
   WhyUs,
 } from "@/components/sections";
@@ -20,6 +21,7 @@ export default function Home() {
         <Hero />
         <Services />
         <Plans />
+        <Projects />
         <Builds />
         <DowntimeCalculator />
         <WhyUs />
