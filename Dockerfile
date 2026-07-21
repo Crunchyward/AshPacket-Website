@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1
 
-# Build static Next.js export, then serve with nginx (Dokploy-friendly).
-# Listens on PORT (default 3000) so Dokploy's common app port works.
+# Dokploy: Next.js standalone (supports /api/contact -> FreeScout).
 ARG NODE_VERSION=24
 
 FROM node:${NODE_VERSION}-alpine AS deps
@@ -12,36 +11,39 @@ RUN npm ci
 FROM node:${NODE_VERSION}-alpine AS builder
 WORKDIR /app
 
-# For a root/custom domain leave BASE_PATH empty.
-# Only set this if the site is served under a subpath (e.g. /AshPacket-Website).
 ARG NEXT_PUBLIC_BASE_PATH=
 ARG NEXT_PUBLIC_SITE_URL=http://localhost
+ARG NEXT_PUBLIC_CONTACT_API_URL=
 
 ENV NEXT_PUBLIC_BASE_PATH=$NEXT_PUBLIC_BASE_PATH
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_CONTACT_API_URL=$NEXT_PUBLIC_CONTACT_API_URL
+ENV NEXT_OUTPUT=standalone
 ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN npm run build \
-  && test -d out \
-  && test -n "$(ls -A out)"
+RUN npm run build
 
-FROM nginx:1.27-alpine AS runner
+FROM node:${NODE_VERSION}-alpine AS runner
+WORKDIR /app
 
-# Dokploy proxies to this port by default for many app templates.
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
-# Only substitute PORT (keep nginx `$uri` etc. intact).
-ENV NGINX_ENVSUBST_FILTER=^PORT$
+ENV HOSTNAME=0.0.0.0
 
-# Remove default site; entrypoint renders templates into conf.d/
-RUN rm -f /etc/nginx/conf.d/default.conf
-COPY docker/nginx.conf.template /etc/nginx/templates/default.conf.template
-COPY --from=builder /app/out /usr/share/nginx/html
+RUN addgroup -S nodejs && adduser -S nextjs -G nodejs
 
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
 EXPOSE 3000
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "server.js"]

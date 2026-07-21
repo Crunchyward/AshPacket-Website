@@ -1,6 +1,6 @@
 # AshPacket Website
 
-Static business site for AshPacket LLC, built with Next.js. Deploy to GitHub Pages or Dokploy.
+Business site for AshPacket LLC, built with Next.js. Deploy to GitHub Pages (static) or Dokploy (Node + FreeScout contact API).
 
 ## Requirements
 
@@ -14,43 +14,71 @@ Works on Linux, Windows, and WSL.
 ```bash
 git clone https://github.com/YOUR_USERNAME/AshPacket-Website.git
 cd AshPacket-Website
+cp .env.example .env.local
 npm install
 npm run dev
 ```
 
 Open http://localhost:3000
 
-### Using nvm (optional)
+For local FreeScout ticket creation, fill in `FREESCOUT_*` values in `.env.local` and run with:
 
 ```bash
-nvm install
-nvm use
-npm install
-npm run dev
+NEXT_OUTPUT=standalone npm run dev
 ```
 
+(`next dev` always supports API routes; `NEXT_OUTPUT=standalone` matters for production builds.)
+
 ## Production build
+
+GitHub Pages (static export to `out/`):
 
 ```bash
 npm run build
 ```
 
-Static files are written to `out/`.
+Dokploy / FreeScout API (standalone Node server):
+
+```bash
+NEXT_OUTPUT=standalone npm run build
+npm run start
+```
+
+## FreeScout contact form
+
+The contact form posts to `/api/contact`, which creates a conversation in FreeScout (API & Webhooks module required).
+
+Set these **server** env vars in Dokploy (never expose the API key in the browser):
+
+| Variable | Example | Purpose |
+|----------|---------|---------|
+| `FREESCOUT_URL` | `https://help.ashpacket.net` | FreeScout base URL (no trailing slash) |
+| `FREESCOUT_API_KEY` | `(from FreeScout → API)` | API key header |
+| `FREESCOUT_MAILBOX_ID` | `1` | Mailbox that should receive website tickets |
+| `NEXT_PUBLIC_SITE_URL` | `https://ashpacket.net` | Canonical site URL |
+| `NEXT_PUBLIC_BASE_PATH` | empty | Leave empty on a root domain |
+
+Optional:
+
+| Variable | Purpose |
+|----------|---------|
+| `NEXT_PUBLIC_CONTACT_API_URL` | Absolute API URL if the static GitHub Pages site should post tickets to your Dokploy app |
 
 ## Deploy to Dokploy
 
-This repo is a static Next.js export (`output: "export"`). Prefer one of these build types:
-
-### Option A: Dockerfile (recommended)
+Use the **Dockerfile** build (required for FreeScout; it runs Next.js standalone on port 3000).
 
 1. Create an Application in Dokploy and connect this GitHub repo (`main`).
 2. Build Type: **Dockerfile**
 3. Dockerfile Path: `Dockerfile`
 4. Docker Context Path: `.`
-5. Environment / build args:
-   - `NEXT_PUBLIC_BASE_PATH` = empty (or `/` only if you truly need a subpath)
+5. Environment:
+   - `NEXT_PUBLIC_BASE_PATH` = empty
    - `NEXT_PUBLIC_SITE_URL` = `https://your-domain.com`
-6. Domain / app port: **3000** (container listens on 3000; a 502 Bad Gateway usually means Dokploy is pointed at the wrong port)
+   - `FREESCOUT_URL` = your FreeScout URL
+   - `FREESCOUT_API_KEY` = your API key
+   - `FREESCOUT_MAILBOX_ID` = mailbox ID (often `1`)
+6. Domain / app port: **3000**
 7. Enable HTTPS, then Deploy.
 
 Local smoke test:
@@ -59,43 +87,23 @@ Local smoke test:
 docker build \
   --build-arg NEXT_PUBLIC_SITE_URL=http://localhost:3000 \
   -t ashpacket-website .
-docker run --rm -p 3000:3000 ashpacket-website
+docker run --rm -p 3000:3000 \
+  -e FREESCOUT_URL=https://help.example.com \
+  -e FREESCOUT_API_KEY=replace-me \
+  -e FREESCOUT_MAILBOX_ID=1 \
+  ashpacket-website
 ```
-
-### Option B: Nixpacks
-
-1. Build Type: **Nixpacks**
-2. Publish Directory: `out`
-3. Same env vars as above (`NEXT_PUBLIC_BASE_PATH` empty, `NEXT_PUBLIC_SITE_URL` set)
-4. Deploy
-
-`nixpacks.toml` in the repo pins Node 24 and the build command.
 
 > Do not set `NEXT_PUBLIC_BASE_PATH=/AshPacket-Website` on Dokploy unless the site is actually hosted under that subpath. That value is for GitHub Pages only.
 
 ## Deploy to GitHub Pages
 
-Deployment runs automatically on every push to `main` via GitHub Actions (Ubuntu).
+Deployment runs automatically on every push to `main` via GitHub Actions (Ubuntu). This build is static and does **not** include `/api/contact`.
 
-1. Push this repository to GitHub.
-2. Go to **Settings → Pages** and set **Source** to **GitHub Actions**.
-3. If the site URL is `username.github.io/repo-name`, add a repository variable:
-   - **Settings → Secrets and variables → Actions → Variables**
-   - Name: `NEXT_PUBLIC_BASE_PATH`
-   - Value: `/your-repo-name`
+To keep website tickets working from GitHub Pages, either:
 
-### Reproducible installs (recommended)
-
-After cloning on any machine, run `npm install` once and commit the generated lock file:
-
-```bash
-npm install
-git add package-lock.json
-git commit -m "Add package-lock.json"
-git push
-```
-
-CI will then use `npm ci` for faster, deterministic builds.
+1. Use Dokploy as the primary site, or
+2. Set Pages build env `NEXT_PUBLIC_CONTACT_API_URL` to `https://your-dokploy-domain/api/contact` (and allow CORS if needed later).
 
 ## Customize
 
@@ -103,18 +111,19 @@ CI will then use `npm ci` for faster, deterministic builds.
 |------|---------|
 | `src/components/sections.tsx` | Page copy and services |
 | `src/components/header.tsx` | Navigation |
+| `src/components/contact-form.tsx` | Contact form UI |
+| `src/app/api/contact/route.ts` | FreeScout ticket API |
 | `src/app/layout.tsx` | SEO metadata |
 | `src/app/globals.css` | Theme colors |
 | `Dockerfile` | Dokploy / container deploy |
-| `nixpacks.toml` | Dokploy Nixpacks build |
 
 ## Project layout
 
 ```
 src/
-  app/           # Pages and global styles
+  app/           # Pages, API routes, global styles
   components/    # Reusable UI components
+  lib/           # Shared helpers
 public/          # Static assets (logo, etc.)
-docker/          # nginx config for container deploys
-out/             # Generated static site (after build)
+out/             # Static export (GitHub Pages builds)
 ```
