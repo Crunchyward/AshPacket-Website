@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { HeroVisual } from "@/components/hero-visual";
 import {
@@ -238,6 +239,12 @@ export function Services() {
           >
             View Managed IT plans
           </a>
+          <Link
+            href="/projects"
+            className="btn-ghost inline-flex min-h-11 w-full items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold text-ink-200 sm:w-auto"
+          >
+            One-time projects
+          </Link>
           <p className="text-sm text-ink-500">
             Retainers for game servers, communities, and small businesses.
           </p>
@@ -320,11 +327,12 @@ export function Plans() {
         <div className="mt-10 grid gap-6 border border-white/8 bg-white/[0.02] px-5 py-6 sm:grid-cols-2 sm:gap-4 sm:px-7">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-widest text-signal">
-              Custom work
+              Extra backup storage
             </p>
             <p className="mt-2 text-sm leading-relaxed text-ink-300">
-              Custom projects and one-time work (migrations, rebuilds, security
-              cleanups, new server standups) are quoted separately.
+              Need more than your plan&apos;s included backup pool? Extra storage
+              is <span className="font-semibold text-white">$9.50 per TB / month</span>,
+              billed with your retainer.
             </p>
           </div>
           <div>
@@ -336,6 +344,117 @@ export function Plans() {
               the offer when you reach out and we will apply it to your first invoice.
             </p>
           </div>
+        </div>
+        <p className="mt-6 text-sm text-ink-500">
+          Need a one-off setup, migration, or hardening?{" "}
+          <Link href="/projects" className="text-signal-bright underline-offset-4 hover:underline">
+            See fixed-price projects
+          </Link>
+          .
+        </p>
+      </div>
+    </section>
+  );
+}
+
+const projects = [
+  {
+    title: "Server setup / rebuild",
+    price: "$175",
+    detail: "Fresh Linux or Windows host: OS, updates, users, firewall baseline, and handoff notes.",
+  },
+  {
+    title: "Host / server migration",
+    price: "$225",
+    detail: "Move a game host, VM, or small-business server to new hardware or a new provider with a cutover plan.",
+  },
+  {
+    title: "Security hardening pass",
+    price: "$149",
+    detail: "Access cleanup, SSH/RDP posture, patch review, and a short report of what changed.",
+  },
+  {
+    title: "Backup & restore drill",
+    price: "$89",
+    detail: "Verify backups actually restore. Includes a timed restore test and findings write-up.",
+  },
+  {
+    title: "Network / Wi-Fi tune-up",
+    price: "$175",
+    detail: "Remote or on-site review of routing, Wi-Fi, DNS, and basic segmentation for a small office or lab.",
+  },
+  {
+    title: "Workstation imaging pack",
+    price: "$119",
+    detail: "Image and standardize up to 3 PCs with your apps, updates, and baseline settings.",
+  },
+  {
+    title: "On-site half day",
+    price: "$275",
+    detail: "Up to 4 hours on-site for installs, rack work, or stubborn hardware. Travel quoted if outside local area.",
+  },
+  {
+    title: "Emergency after-hours remote",
+    price: "$125",
+    detail: "Priority remote incident response outside normal hours. Applies per incident, not per hour.",
+  },
+];
+
+export function Projects() {
+  return (
+    <section id="projects" className="relative py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl">
+          <p className="section-label">One-time Projects</p>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Fixed-price projects
+          </h1>
+          <p className="mt-4 text-base leading-relaxed text-ink-400 sm:text-lg">
+            Clear scope, clear price. Ideal when you need a setup, migration, or
+            cleanup without starting a monthly retainer. Looking for ongoing
+            coverage instead?{" "}
+            <Link href="/#plans" className="text-signal-bright underline-offset-4 hover:underline">
+              View Managed IT plans
+            </Link>
+            .
+          </p>
+        </div>
+
+        <div className="mt-12 divide-y divide-white/8 border-y border-white/8">
+          {projects.map((project) => (
+            <article
+              key={project.title}
+              className="grid gap-3 py-6 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-8"
+            >
+              <div>
+                <h3 className="text-lg font-semibold text-white">{project.title}</h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-400">
+                  {project.detail}
+                </p>
+              </div>
+              <div className="sm:text-right">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+                  Starting at
+                </p>
+                <p className="mt-1 text-2xl font-semibold tracking-tight text-white">
+                  {project.price}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-10 flex flex-col gap-4 border border-white/8 bg-white/[0.02] px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+          <p className="max-w-xl text-sm leading-relaxed text-ink-300">
+            Larger or unusual work is still quoted. Custom PC and server builds are
+            parts at cost, plus a build fee and shipping.
+          </p>
+          <a
+            href="#contact"
+            className="btn-brand inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold"
+          >
+            Book a project
+          </a>
         </div>
       </div>
     </section>
@@ -355,6 +474,7 @@ export function Builds() {
             <p className="mt-4 leading-relaxed text-ink-400">
               Need a quiet office PC, a render workstation, or a small business
               server that just works? We build to your workload, not a retail SKU.
+              Pricing is parts at cost, plus a build fee and shipping.
             </p>
             <a
               href="#contact"
@@ -489,7 +609,7 @@ const faqs = [
   {
     question: "Can you build PCs or servers for us?",
     answer:
-      "Yes. We spec and assemble workstations, creator/engineering rigs, NAS units, and small-business servers. Builds include burn-in, imaging, and deployment so machines arrive ready for production.",
+      "Yes. We spec and assemble workstations, creator/engineering rigs, NAS units, and small-business servers. Builds are parts at cost, plus a build fee and shipping, with burn-in, imaging, and deployment included in the handoff.",
   },
   {
     question: "What happens when something breaks outside business hours?",
@@ -499,12 +619,17 @@ const faqs = [
   {
     question: "Do I need an ongoing contract?",
     answer:
-      "No contract required for break/fix or one-off builds. Managed IT plans are month-to-month retainers you can start or stop as needed. Many clients begin with a one-off fix, then move onto Starter, Pro, or Managed.",
+      "No contract required for break/fix, one-time projects, or builds. Managed IT plans are month-to-month retainers you can start or stop as needed. Many clients begin with a fixed-price project, then move onto Starter, Pro, or Managed.",
   },
   {
     question: "What is included in Managed IT plans?",
     answer:
-      "Remote support for game servers, communities, and small businesses: setup and maintenance, backups, troubleshooting, and security. Starter is $40/mo, Pro is $85/mo, and Managed is $150/mo. Custom projects are quoted separately, and new clients get 15% off month one.",
+      "Remote support for game servers, communities, and small businesses: setup and maintenance, backups, troubleshooting, and security. Starter is $40/mo, Pro is $85/mo, and Managed is $150/mo. Extra backup storage is $9.50 per TB per month. New clients get 15% off month one.",
+  },
+  {
+    question: "Do you publish prices for one-time work?",
+    answer:
+      "Yes. Common projects like server setup ($175), migrations ($225), hardening ($149), backup restore drills ($89), and emergency after-hours remote ($125) have fixed starting prices. Custom PC and server builds are parts at cost, plus a build fee and shipping.",
   },
   {
     question: "What technologies do you support?",
@@ -616,24 +741,27 @@ export function Footer() {
             </p>
           </div>
           <nav className="flex max-w-md flex-wrap justify-center gap-x-5 gap-y-3 text-sm text-ink-400">
-            <a href="#services" className="transition-colors hover:text-white">
+            <Link href="/#services" className="transition-colors hover:text-white">
               Services
-            </a>
-            <a href="#plans" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#plans" className="transition-colors hover:text-white">
               Plans
-            </a>
-            <a href="#builds" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/projects" className="transition-colors hover:text-white">
+              Projects
+            </Link>
+            <Link href="/#builds" className="transition-colors hover:text-white">
               Builds
-            </a>
-            <a href="#about" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#about" className="transition-colors hover:text-white">
               About
-            </a>
-            <a href="#faq" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#faq" className="transition-colors hover:text-white">
               FAQ
-            </a>
-            <a href="#contact" className="transition-colors hover:text-white">
+            </Link>
+            <Link href="/#contact" className="transition-colors hover:text-white">
               Contact
-            </a>
+            </Link>
           </nav>
           <p className="text-center text-xs text-ink-600 md:text-right">
             &copy; {new Date().getFullYear()} AshPacket LLC

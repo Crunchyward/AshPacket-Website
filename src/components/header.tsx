@@ -1,17 +1,19 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/logo";
 
 const navLinks = [
-  { href: "#builds", label: "Builds" },
-  { href: "#about", label: "About" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#builds", label: "Builds" },
+  { href: "/#about", label: "About" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 const serviceSubLinks = [
-  { href: "#services", label: "Overview", desc: "MSP, sysadmin, builds, break/fix" },
-  { href: "#plans", label: "Managed IT Plans", desc: "Starter, Pro, and Managed retainers" },
+  { href: "/#services", label: "Overview", desc: "MSP, sysadmin, builds, break/fix" },
+  { href: "/#plans", label: "Managed IT Plans", desc: "Starter, Pro, and Managed retainers" },
+  { href: "/projects", label: "One-time Projects", desc: "Fixed-price setups, migrations, and hardenings" },
 ];
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -111,9 +113,9 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-        <a href="#" aria-label="AshPacket LLC home" onClick={close} className="min-w-0 shrink">
+        <Link href="/" aria-label="AshPacket LLC home" onClick={close} className="min-w-0 shrink">
           <Logo className="h-7 w-auto max-w-[11.5rem] sm:h-9 sm:max-w-none" priority />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
           <div className="relative" ref={servicesRef}>
@@ -134,7 +136,7 @@ export function Header() {
                 className="absolute left-0 top-full z-50 mt-2 w-72 overflow-hidden rounded-lg border border-white/10 bg-ink-950/95 p-1.5 shadow-xl shadow-black/40 backdrop-blur-xl"
               >
                 {serviceSubLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     role="menuitem"
                     href={link.href}
@@ -143,27 +145,27 @@ export function Header() {
                   >
                     <span className="block text-sm font-medium text-white">{link.label}</span>
                     <span className="mt-0.5 block text-xs text-ink-400">{link.desc}</span>
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
 
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="rounded-lg px-3.5 py-2 text-sm text-ink-300 transition-colors hover:bg-white/5 hover:text-white"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="btn-brand ml-2 rounded-lg px-5 py-2 text-sm font-semibold"
           >
             Get support
-          </a>
+          </Link>
         </nav>
 
         <button
@@ -198,7 +200,7 @@ export function Header() {
             Services
           </p>
           {serviceSubLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="rounded-lg px-4 py-3.5 text-base font-medium text-ink-200 transition-colors hover:bg-white/5 hover:text-white"
@@ -206,25 +208,25 @@ export function Header() {
             >
               {link.label}
               <span className="mt-0.5 block text-sm font-normal text-ink-500">{link.desc}</span>
-            </a>
+            </Link>
           ))}
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="rounded-lg px-4 py-3.5 text-base font-medium text-ink-200 transition-colors hover:bg-white/5 hover:text-white"
               onClick={close}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="btn-brand mt-2 min-h-11 rounded-lg px-4 py-3.5 text-center text-base font-semibold"
             onClick={close}
           >
             Get support
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
