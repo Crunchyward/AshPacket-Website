@@ -1,35 +1,62 @@
 "use client";
 
 import { useState } from "react";
-
-// Create a free form at https://formspree.io, then replace YOUR_FORM_ID
-// with the ID from your form's endpoint URL.
-const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+import { basePath } from "@/lib/site";
 
 type Status = "idle" | "sending" | "success" | "error";
 
+const CONTACT_ENDPOINT =
+  process.env.NEXT_PUBLIC_CONTACT_API_URL?.replace(/\/$/, "") ||
+  `${basePath}/api/contact`;
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
+    const data = new FormData(form);
+
     setStatus("sending");
+    setErrorMessage(null);
+
+    const payload = {
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      topic: String(data.get("topic") ?? ""),
+      message: String(data.get("message") ?? ""),
+      website: String(data.get("website") ?? ""),
+    };
 
     try {
-      const response = await fetch(FORM_ENDPOINT, {
+      const response = await fetch(CONTACT_ENDPOINT, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
         form.reset();
         setStatus("success");
-      } else {
-        setStatus("error");
+        return;
       }
+
+      const result = (await response.json().catch(() => null)) as
+        | { error?: string }
+        | null;
+      setErrorMessage(
+        result?.error ??
+          "Something went wrong sending your message. Please try again.",
+      );
+      setStatus("error");
     } catch {
+      setErrorMessage(
+        "Something went wrong sending your message. Please try again, or email us directly.",
+      );
       setStatus("error");
     }
   }
@@ -50,6 +77,12 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="text-left">
+      {/* Honeypot for bots; keep hidden from real users */}
+      <div className="absolute -left-[9999px] top-auto h-0 w-0 overflow-hidden" aria-hidden>
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink-200">
@@ -115,12 +148,12 @@ export function ContactForm() {
 
       {status === "error" && (
         <p className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-          Something went wrong sending your message. Please try again, or email
-          us directly at{" "}
-          <a href="mailto:hello@ashpacket.com" className="underline underline-offset-2">
-            hello@ashpacket.com
-          </a>
-          .
+          {errorMessage}{" "}
+          Email{" "}
+          <a href="mailto:support@ashpacket.net" className="underline underline-offset-2">
+            support@ashpacket.net
+          </a>{" "}
+          if it keeps failing.
         </p>
       )}
 
