@@ -8,8 +8,11 @@ const description =
   "Turnstile Privacy Addendum for AshPacket LLC visitors. Supplemental privacy information from Cloudflare for bot detection Signals.";
 
 export const metadata: Metadata = {
-  title: "Turnstile Privacy Addendum | AshPacket LLC",
+  title: "Turnstile Privacy Addendum",
   description,
+  alternates: {
+    canonical: "/turnstile-privacy",
+  },
   openGraph: {
     title: "Turnstile Privacy Addendum | AshPacket LLC",
     description,

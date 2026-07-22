@@ -20,8 +20,15 @@ const description =
   "AshPacket LLC delivers managed IT, system administration, break/fix support, and custom PC & server builds for businesses that need reliable infrastructure.";
 
 export const metadata: Metadata = {
-  title: "AshPacket LLC | Managed IT, Sysadmin & Custom Builds",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "AshPacket LLC | Managed IT, Sysadmin & Custom Builds",
+    template: "%s | AshPacket LLC",
+  },
   description,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: `${basePath}/favicon.png`,
     apple: `${basePath}/favicon.png`,
@@ -46,6 +53,10 @@ export const metadata: Metadata = {
     title: "AshPacket LLC | Managed IT & Infrastructure",
     description,
     images: [`${siteUrl}/og-image.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
