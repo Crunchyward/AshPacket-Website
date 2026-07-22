@@ -24,8 +24,12 @@ jobs:
         with:
           node-version-file: .nvmrc
 
+      - name: Upgrade npm
+        run: npm install -g npm@12.0.1
+
       - name: Install dependencies
         run: |
+          npm -v
           if [ -f package-lock.json ]; then
             npm ci
           else

@@ -1,10 +1,12 @@
 # syntax=docker/dockerfile:1
 
 # Dokploy: Next.js standalone (supports /api/contact -> FreeScout).
-ARG NODE_VERSION=24
+ARG NODE_VERSION=24.18.0
 
 FROM node:${NODE_VERSION}-alpine AS deps
 WORKDIR /app
+# Node 24 images still ship npm 11; pin npm 12 for engines + CI parity.
+RUN npm install -g npm@12.0.1
 COPY package.json package-lock.json ./
 RUN npm ci
 
@@ -20,6 +22,8 @@ ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 ENV NEXT_PUBLIC_CONTACT_API_URL=$NEXT_PUBLIC_CONTACT_API_URL
 ENV NEXT_OUTPUT=standalone
 ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN npm install -g npm@12.0.1
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
