@@ -4,8 +4,8 @@ Business site for AshPacket LLC, built with Next.js. Deploy to GitHub Pages (sta
 
 ## Requirements
 
-- [Node.js](https://nodejs.org/) 20 or later (Node 24 recommended, see `.nvmrc`)
-- npm (included with Node.js)
+- [Node.js](https://nodejs.org/) 24.15 or later (see `.nvmrc`)
+- npm 12.0.1 or later (`npm install -g npm@12.0.1` — Node 24 still ships npm 11 by default)
 
 Works on Linux, Windows, and WSL.
 
