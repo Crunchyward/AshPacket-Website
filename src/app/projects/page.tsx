@@ -7,8 +7,11 @@ const description =
   "Fixed-price IT projects from AshPacket LLC: server setup, migrations, security hardening, backup drills, and more.";
 
 export const metadata: Metadata = {
-  title: "One-time Projects | AshPacket LLC",
+  title: "One-time Projects",
   description,
+  alternates: {
+    canonical: "/projects",
+  },
   openGraph: {
     title: "One-time Projects | AshPacket LLC",
     description,

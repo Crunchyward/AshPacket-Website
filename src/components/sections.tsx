@@ -762,6 +762,12 @@ export function Footer() {
             <Link href="/#contact" className="transition-colors hover:text-white">
               Contact
             </Link>
+            <Link
+              href="/turnstile-privacy"
+              className="transition-colors hover:text-white"
+            >
+              Turnstile Privacy
+            </Link>
           </nav>
           <p className="text-center text-xs text-ink-600 md:text-right">
             &copy; {new Date().getFullYear()} AshPacket LLC
